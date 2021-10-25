@@ -182,7 +182,7 @@ leaflet(data1999) %>%
 Take more closer look at 1999 year data
 
 ```{r summarize data1999}
-table(data1999$`Cause Name`)
+knitr::kable(table(data1999$`Cause Name`))
 region1999<- data1999 %>%
   group_by(Region) %>%
   summarise(sum(Deaths))%>%
@@ -231,8 +231,8 @@ leaflet(data2017) %>%
 
 Take closer look at 2017 data
 
-```{r summarize data1999}
-table(data2017$`Cause Name`)
+```{r summarize data2017}
+knitr::kable(table(data2017$`Cause Name`))
 region2017<- data2017 %>%
   group_by(Region) %>%
   summarise(sum(Deaths))%>%

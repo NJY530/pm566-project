@@ -3,10 +3,6 @@ Midterm - Leading Causes of Death: United States
 Jiayi Nie
 10/19/2021
 
-### Preliminary Results (provide summary statistics in tabular form and publication-quality figures, take a look at the kable function from knitr to write nice tables in Rmarkdown),
-
-### Conclusion about what you found in terms of the formulated question.
-
 ## Intro
 
 The dataset used for this project presents the age-adjusted death rates
@@ -49,6 +45,10 @@ conclusion.
 
 ## Method
 
+The dataset resource are included in the intro part. In this part we
+will use EDA checklist to clean and wrangle our data. Primarily used
+ggplot and leaflet do the data visualization to explore data.
+
 ### Data loading
 
 ``` r
@@ -66,7 +66,7 @@ region <- data.table::fread("USAregion2.csv")
 location <- data.table::fread("USAlocation.csv")
 ```
 
-### Data wrangling
+### Data wrangling and cleaning
 
 Checking the dimension, headers and footers of the data
 
@@ -260,11 +260,11 @@ knitr::kable(summary(is.na(alldata)))
 |  | FALSE:10868   | FALSE:10868   | FALSE:10868    | FALSE:10868   | FALSE:10868   | FALSE:10868             | FALSE:10659   | FALSE:10659   | FALSE:10659   | FALSE:10659   | FALSE:10659   | FALSE:10659   |
 |  | NA            | NA            | NA             | NA            | NA            | NA                      | TRUE :209     | TRUE :209     | TRUE :209     | TRUE :209     | TRUE :209     | TRUE :209     |
 
-## Data exploration
+## Data exploration and Preliminary Results
 
 ### Figure out “what’s the death rate change pattern in the whole US” from time duration, region and causes three aspects
 
-#### Let’s go time duration first, illustrate the all-causes death rate change pattern in the US.
+### Let’s go time duration first, illustrate the all-causes death rate change pattern in the US.
 
 First extra all causes data and create a new dataset
 
@@ -292,7 +292,9 @@ This graph indicates all 51 states and the whole United states death
 rate change during 18 years. According to this graph, all 51 states
 follow a downward trend which meet our hypothesis.
 
-#### Next from the region prospective, use the location information to make a leaflet that indicates the leading cause of death with highest death number in 2017 and 1999 respectively
+### Next from the region prospective, use the location information to make a leaflet that indicates the leading cause of death with highest death number in 2017 and 1999 respectively
+
+#### First look back to 1999
 
 ``` r
 data1999<- alldata %>%
@@ -317,63 +319,13 @@ leaflet(data1999) %>%
 Take more closer look at 1999 year data
 
 ``` r
-knitr::kable(data1999$`Cause Name`)
+knitr::kable(table(data1999$`Cause Name`))
 ```
 
-| x             |
-| :------------ |
-| Heart disease |
-| Cancer        |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
-| Heart disease |
+| Var1          | Freq |
+| :------------ | ---: |
+| Cancer        |    1 |
+| Heart disease |   51 |
 
 ``` r
 region1999<- data1999 %>%
@@ -392,8 +344,82 @@ knitr::kable(region1999)
 | West      |      112778 |
 | US total  |      725192 |
 
-Now we know that in 1999, the most risk death cause is heart disease.
-And the region with highest death number is Southeast, which include
-Alabama, Arkansas, District of Columbia, Delaware, Florida, Georgia,
-Kentucky, Louisiana, Mississippi, North Carolina, South Carolina,
-Tennessee, Virginia West Virginia,
+Now we know that in 1999, the most risk death cause is **heart disease**
+with 50 states had this leading cause. And the region with highest death
+number is **Southeast**, which include Alabama, Arkansas, District of
+Columbia, Delaware, Florida, Georgia, Kentucky, Louisiana, Mississippi,
+North Carolina, South Carolina, Tennessee, Virginia West Virginia
+
+##### Now we pay more attention on most recent record in 2017.
+
+``` r
+data2017<- alldata %>%
+  group_by(State) %>%
+  filter(Year ==2017, `Cause Name` != "All causes") %>%
+  filter(Deaths == max(Deaths))
+```
+
+``` r
+pal2 <- colorNumeric(c('cyan3','goldenrod2'),domain=data2017$Deaths)
+
+leaflet(data2017) %>% 
+  addProviderTiles('CartoDB.Positron') %>%
+  addCircles(
+    lat = ~Latitude, lng=~Longitude,
+    color = ~ pal2(data2017$Deaths),
+    label = ~paste0(Deaths, ' Leading cause: ', `Cause Name` ),
+    opacity =1, fillOpacity=1, radius=600
+  ) 
+```
+
+Take closer look at 2017 data
+
+``` r
+knitr::kable(table(data2017$`Cause Name`))
+```
+
+| Var1          | Freq |
+| :------------ | ---: |
+| Cancer        |   13 |
+| Heart disease |   39 |
+
+``` r
+region2017<- data2017 %>%
+  group_by(Region) %>%
+  summarise(sum(Deaths))%>%
+  replace_na(list(Region = "US total"))
+knitr::kable(region2017)
+```
+
+| Region    | sum(Deaths) |
+| :-------- | ----------: |
+| Midwest   |      149135 |
+| Northeast |      136893 |
+| Southeast |      184949 |
+| Southwest |       72412 |
+| West      |      111289 |
+| US total  |      647457 |
+
+Now we know that in 2017, the most risk death cause is still **heart
+disease**. And the region with highest death number is still
+**Southeast**, which include Alabama,
+
+### Brief Conclusion
+
+Now we could draw a preliminary conclusion to our question: \* It’s
+apparently that all death rate went down in the past 18 years in all 51
+states \* Compared to 1999, the death number decrease in 2017. However,
+there is an exception that the death number in region **southwest**
+increase from 68933 to 72412. Possible reason might be the increase
+population in this region. Could take closer look combined with some
+external information next step. \* From the geographic aspect, the
+pattern did not change. The order of death number in these five region
+is still **Southeast \> Midwest \> Northwest \> West \> Southwest** It’s
+worth noting that, southwest has significant low number compared to
+other 4. Could combined with population data and state death rate data
+to check whether the low number comes from low population or low disease
+incidence. (we don’t know the region population, so could not sum all
+death rate up for now) \* From the disease cause aspect, in 1999, the
+most fatal death cause is heart disease which becoming leading cause in
+50 states. In 2017, Cancer catchs up a little. This might indicate that
+nowadays cancer should pay more attention to.
