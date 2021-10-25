@@ -206,7 +206,7 @@ Tennessee,
 Virginia
 West Virginia
 
-##### Now we pay more attention on most recent record in 2017.
+#### Now we pay more attention on most recent record in 2017.
 
 ```{r}
 data2017<- alldata %>%
@@ -247,7 +247,11 @@ Now we know that in 2017, the most risk death cause is still **heart disease**. 
 ### Brief Conclusion
 
 Now we could draw a preliminary conclusion to our question:
+
 * It's apparently that all death rate went down in the past 18 years in all 51 states
+
 * Compared to 1999, the death number decrease in 2017. However, there is an exception that the death number in region **southwest** increase from 68933 to 72412. Possible reason might be the increase population in this region. Could take closer look combined with some external information next step.
+
 * From the geographic aspect, the pattern did not change. The order of death number in these five region is still **Southeast > Midwest > Northwest > West > Southwest** It's worth noting that, southwest has significant low number compared to other 4. Could combined with population data and state death rate data to check whether the low number comes from low population or low disease incidence. (we don't know the region population, so could not sum all death rate up for now)
+
 * From the disease cause aspect, in 1999, the most fatal death cause is heart disease which becoming leading cause in 50 states. In 2017, Cancer catchs up a little. This might indicate that nowadays cancer should pay more attention to. 
