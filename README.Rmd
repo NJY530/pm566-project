@@ -4,7 +4,7 @@ author: Jiayi Nie
 date: 10/19/2021
 output:
   github_document: 
-    html_preview: true
+    html_preview: false
   html_document: default
   word_document: default
 always_allow_html: true
@@ -74,7 +74,7 @@ It includes 10.9K rows and 6 column:column information:Year, 113 cause name, Cau
 
 Check the variable type of the data
 ```{r NA check, results='asis'}
-knitr::kable(str(data))
+knitr::kable((str(data)))
 ```
 
 
@@ -167,7 +167,7 @@ data1999<- alldata %>%
 
 
 ```{r leaflet 1999, cache=TRUE, eval = knitr::is_html_output(excludes = "gfm")}
-pal <- colorNumeric(palette = "RdYlBu",domain=data1999$Deaths)
+pal <- colorFactor(palette = "RdYlBu",domain=data1999$Deaths)
 
 leaflet(data1999) %>% 
   addProviderTiles('CartoDB.Positron') %>%
@@ -217,7 +217,7 @@ data2017<- alldata %>%
 
 
 ```{r, leaflet 2017, cache=TRUE, eval = knitr::is_html_output(excludes = "gfm")}
-pal2 <- colorNumeric(c('cyan3','goldenrod2'),domain=data2017$Deaths)
+pal2 <- colorFactor(c('cyan3','goldenrod2'),domain=data2017$Deaths)
 
 leaflet(data2017) %>% 
   addProviderTiles('CartoDB.Positron') %>%

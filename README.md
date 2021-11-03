@@ -111,7 +111,7 @@ name, Cause name, State, Deaths, Age-adjusted death rate
 Check the variable type of the data
 
 ``` r
-knitr::kable(str(data))
+knitr::kable((str(data)))
 ```
 
 Classes ‘data.table’ and ‘data.frame’: 10868 obs. of 6 variables: $ Year
@@ -304,7 +304,7 @@ data1999<- alldata %>%
 ```
 
 ``` r
-pal <- colorNumeric(palette = "RdYlBu",domain=data1999$Deaths)
+pal <- colorFactor(palette = "RdYlBu",domain=data1999$Deaths)
 
 leaflet(data1999) %>% 
   addProviderTiles('CartoDB.Positron') %>%
@@ -360,7 +360,7 @@ data2017<- alldata %>%
 ```
 
 ``` r
-pal2 <- colorNumeric(c('cyan3','goldenrod2'),domain=data2017$Deaths)
+pal2 <- colorFactor(c('cyan3','goldenrod2'),domain=data2017$Deaths)
 
 leaflet(data2017) %>% 
   addProviderTiles('CartoDB.Positron') %>%
