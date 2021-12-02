@@ -144,8 +144,8 @@ allcause<- alldata %>%
 Then use ggplot to draw line chart (year vs death rate) and grouped by states, should have 52 lines in total
 
 ```{r line chart, fig.height = 8, fig.width = 12, fig.align = "center"}
-ggplot(allcause,mapping = aes(x=allcause$`Year`, y = allcause$`Age-adjusted Death`,color = "Orange")) +
-  geom_point()+
+ggplot(allcause,mapping = aes(x=allcause$`Year`, y = allcause$`Age-adjusted Death`)) +
+  geom_point(color = "Orange")+
   geom_smooth(method="lm", color = "Black")+
   facet_wrap(~State)+
   labs(title = "Death rate change in each state and the whole US from 1999 to 2017",x="year", y ="death rate", size = 8)
