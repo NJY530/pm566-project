@@ -384,7 +384,7 @@ div.tocify {
 <p>The dataset resource are included in the intro part. In this part we will use EDA checklist to clean and wrangle our data. Primarily used ggplot and leaflet do the data visualization to explore data.</p>
 <div id="data-loading" class="section level2">
 <h2>Data loading</h2>
-<pre class="r"><code>if (!file.exists(&quot;bi63-dtpu.csv&quot;))
+<pre class="r code-r"><code>if (!file.exists(&quot;bi63-dtpu.csv&quot;))
   download.file(
     url = &quot;https://data.cdc.gov/api/views/bi63-dtpu/rows.csv&quot;,
     destfile = &quot;bi63-dtpu.csv&quot;,
@@ -400,7 +400,7 @@ location &lt;- data.table::fread(&quot;https://raw.githubusercontent.com/NJY530/
 <div id="data-wrangling-and-cleaning" class="section level2">
 <h2>Data wrangling and cleaning</h2>
 <p>Checking the dimension, headers and footers of the data</p>
-<pre class="r"><code>knitr::kable(dim(data))</code></pre>
+<pre class="r code-r"><code>knitr::kable(dim(data))</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -416,7 +416,7 @@ location &lt;- data.table::fread(&quot;https://raw.githubusercontent.com/NJY530/
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>knitr::kable(head(data))</code></pre>
+<pre class="r code-r"><code>knitr::kable(head(data))</code></pre>
 <table>
 <colgroup>
 <col width="3%" />
@@ -487,7 +487,7 @@ location &lt;- data.table::fread(&quot;https://raw.githubusercontent.com/NJY530/
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>knitr::kable(tail(data))</code></pre>
+<pre class="r code-r"><code>knitr::kable(tail(data))</code></pre>
 <table>
 <colgroup>
 <col width="3%" />
@@ -560,7 +560,7 @@ location &lt;- data.table::fread(&quot;https://raw.githubusercontent.com/NJY530/
 </table>
 <p>It includes 10.9K rows and 6 column:column information:Year, 113 cause name, Cause name, State, Deaths, Age-adjusted death rate</p>
 <p>Check how many category in key colunmns (Cause name and State)</p>
-<pre class="r"><code>cate1 &lt;- unique(data$`Cause Name`)
+<pre class="r code-r"><code>cate1 &lt;- unique(data$`Cause Name`)
 knitr::kables(list(as.array(cate1),length(cate1)))</code></pre>
 <table class="kable_wrapper">
 <tbody>
@@ -574,7 +574,7 @@ knitr::kables(list(as.array(cate1),length(cate1)))</code></pre>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>cate2&lt;- unique(data$State)
+<pre class="r code-r"><code>cate2&lt;- unique(data$State)
 knitr::kables(list(as.data.frame(cate2),length(cate2)))</code></pre>
 <table class="kable_wrapper">
 <tbody>
@@ -590,7 +590,7 @@ knitr::kables(list(as.data.frame(cate2),length(cate2)))</code></pre>
 </table>
 <p>There are 10 causes of death (1 extra is “All-cause”) and 51 states (including District of Columbia) and the whole US included in this dataset.</p>
 <p>Check NA</p>
-<pre class="r"><code>d1 = summary(is.na(data))
+<pre class="r code-r"><code>d1 = summary(is.na(data))
 d2 = summary(data)
 knitr::kable(rbind(d1,d2))</code></pre>
 <table>
@@ -690,7 +690,7 @@ knitr::kable(rbind(d1,d2))</code></pre>
 </tbody>
 </table>
 <p>There is no NA. Next create a new variable with state region category and location information</p>
-<pre class="r"><code>d_region&lt;-merge(
+<pre class="r code-r"><code>d_region&lt;-merge(
   x=data,
   y=region,
   by.x= &quot;State&quot;,
@@ -708,7 +708,7 @@ alldata &lt;- merge(
   all.y=FALSE
 )</code></pre>
 <p>We already know that there is a “United States” category in “State” in our original data, check if there is 209 NA in our new colunm to test the merge result.</p>
-<pre class="r"><code>knitr::kable(summary(is.na(alldata)))</code></pre>
+<pre class="r code-r"><code>knitr::kable(summary(is.na(alldata)))</code></pre>
 <table style="width:100%;">
 <colgroup>
 <col width="1%" />
@@ -802,16 +802,15 @@ alldata &lt;- merge(
 <p>Figure out “what’s the death rate change pattern in the whole US” from time duration, region and causes three aspects</p>
 <p>Let’s go time duration first, illustrate the all-causes death rate change pattern in the US.</p>
 <p>First extra all causes data and create a new dataset</p>
-<pre class="r"><code>allcause&lt;- alldata %&gt;%
+<pre class="r code-r"><code>allcause&lt;- alldata %&gt;%
   filter(alldata$`Cause Name` == &quot;All causes&quot;)</code></pre>
 <p>Then use ggplot to draw line chart (year vs death rate) and grouped by states, should have 52 lines in total</p>
-<pre class="r"><code>ggplot(allcause,mapping = aes(x=allcause$`Year`, y = allcause$`Age-adjusted Death`)) +
+<pre class="r code-r"><code>ggplot(allcause,mapping = aes(x=allcause$`Year`, y = allcause$`Age-adjusted Death`)) +
   geom_point(color = &quot;Orange&quot;)+
   geom_smooth(method=&quot;lm&quot;, color = &quot;Black&quot;)+
   facet_wrap(~State)+
   labs(title = &quot;Death rate change in each state and the whole US from 1999 to 2017&quot;,x=&quot;year&quot;, y =&quot;death rate&quot;, size = 8)</code></pre>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="Midterm_files/figure-html/line%20chart-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="Midterm_files/figure-html/line%20chart-1.png" width="700px" style="display: block; margin: auto;" /></p>
 <p>This graph indicates all 51 states and the whole United states death rate change during 18 years. According to this graph, all 51 states follow a downward trend which meet our hypothesis.</p>
 <p><br></p>
 </div>
@@ -821,11 +820,11 @@ alldata &lt;- merge(
 <p><br></p>
 <div id="section" class="section level3">
 <h3>1999</h3>
-<pre class="r"><code>data1999&lt;- alldata %&gt;%
+<pre class="r code-r"><code>data1999&lt;- alldata %&gt;%
   group_by(State) %&gt;%
   filter(Year ==1999, `Cause Name` != &quot;All causes&quot;) %&gt;%
   filter(Deaths == max(Deaths))</code></pre>
-<pre class="r"><code>pal &lt;- colorFactor(palette = &quot;RdYlBu&quot;,domain=data1999$Deaths)
+<pre class="r code-r"><code>pal &lt;- colorFactor(palette = &quot;RdYlBu&quot;,domain=data1999$Deaths)
 
 leaflet(data1999) %&gt;% 
   addProviderTiles(&#39;CartoDB.Positron&#39;) %&gt;%
@@ -835,10 +834,10 @@ leaflet(data1999) %&gt;%
     label = ~paste0(Deaths, &#39; Leading cause: &#39;, `Cause Name` ),
     opacity =1, fillOpacity=1, radius=600
   ) </code></pre>
-<div id="htmlwidget-e2514489241a5425417d" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e2514489241a5425417d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircles","args":[[32.6010112,61.3025006,34.1682185,34.7519275,37.2718745,38.9979339,41.5187835,39.145251,38.8993487,27.9757279,32.6781248,20.46,45.4945756,39.739318,39.7662195,41.9383166,38.4987789,37.8222935,30.9733766,45.2185133,38.8063524,42.0629398,44.9435598,46.4418595,32.5851062,38.3046615,46.6797995,41.5008195,38.502032,44.0012306,40.1430058,34.1662325,40.7056258,35.2145629,47.4678819,40.1903624,35.3097654,44.1419049,40.9945928,41.5827282,33.62505,44.2126995,35.830521,31.1693363,null,39.4997605,43.8717545,38.0033855,38.8993487,38.9201705,44.7862968,43.000325],[-86.6807365,-158.7750198,-111.930907,-92.1313784,-119.2704153,-105.550567,-72.757507,-75.4189206,-77.0145666,-83.8330166,-83.2229757,-157.505,-114.1424303,-89.504139,-86.441277,-93.389798,-98.3200779,-85.7682399,-91.4299097,-69.0148656,-77.2684162,-71.718067,-86.4158049,-93.3655146,-89.8772196,-92.437099,-110.044783,-99.680902,-117.0230604,-71.5799231,-74.7311156,-106.0260685,-73.97968,-79.8912675,-100.3022655,-82.6692525,-98.7165585,-120.5380993,-77.6046984,-71.5064508,-80.9470381,-100.2471641,-85.9785989,-100.0768425,null,-111.547028,-72.4477828,-79.4587861,-77.0145665,-80.1816905,-89.8267049,-107.5545669],600,null,null,{"interactive":true,"className":"","stroke":true,"color":["#C7E7F1","#A50026","#F7FBD0","#FEE495","#36429B","#FEBF70","#FFF0A8","#D62F27","#C22027","#3F5BA7","#88BCD9","#E85537","#ED603C","#4E7FB9","#93C5DE","#FFEA9F","#FFD283","#D2ECF4","#E4F4F1","#FA9253","#DCF1F7","#A8D6E8","#6194C5","#FFFCBA","#FFF6B1","#7DB4D5","#E24A31","#FEB567","#FDAA5F","#F36B42","#6A9FCA","#FB9E59","#3B4FA1","#72ABD0","#CC2827","#5889BF","#F1F9DB","#FEDC8C","#4574B3","#F8854D","#FCFEC5","#DC3D2C","#9DCEE3","#4267AD","#313695","#F67848","#B81827","#B2DDEB","#EBF7E6","#FEC97A","#BDE2EE","#AF0D26"],"weight":5,"opacity":1,"fill":true,"fillColor":["#C7E7F1","#A50026","#F7FBD0","#FEE495","#36429B","#FEBF70","#FFF0A8","#D62F27","#C22027","#3F5BA7","#88BCD9","#E85537","#ED603C","#4E7FB9","#93C5DE","#FFEA9F","#FFD283","#D2ECF4","#E4F4F1","#FA9253","#DCF1F7","#A8D6E8","#6194C5","#FFFCBA","#FFF6B1","#7DB4D5","#E24A31","#FEB567","#FDAA5F","#F36B42","#6A9FCA","#FB9E59","#3B4FA1","#72ABD0","#CC2827","#5889BF","#F1F9DB","#FEDC8C","#4574B3","#F8854D","#FCFEC5","#DC3D2C","#9DCEE3","#4267AD","#313695","#F67848","#B81827","#B2DDEB","#EBF7E6","#FEC97A","#BDE2EE","#AF0D26"],"fillOpacity":1},null,null,["13419 Leading cause: Heart disease","633 Leading cause: Cancer","10800 Leading cause: Heart disease","8315 Leading cause: Heart disease","71930 Leading cause: Heart disease","6420 Leading cause: Heart disease","9127 Leading cause: Heart disease","2011 Leading cause: Heart disease","1652 Leading cause: Heart disease","51434 Leading cause: Heart disease","17597 Leading cause: Heart disease","2410 Leading cause: Heart disease","2532 Leading cause: Heart disease","33387 Leading cause: Heart disease","16661 Leading cause: Heart disease","8699 Leading cause: Heart disease","6975 Leading cause: Heart disease","12098 Leading cause: Heart disease","12007 Leading cause: Heart disease","3418 Leading cause: Heart disease","12080 Leading cause: Heart disease","15871 Leading cause: Heart disease","27693 Leading cause: Heart disease","9533 Leading cause: Heart disease","9336 Leading cause: Heart disease","17974 Leading cause: Heart disease","2049 Leading cause: Heart disease","4497 Leading cause: Heart disease","4231 Leading cause: Heart disease","2751 Leading cause: Heart disease","23493 Leading cause: Heart disease","3452 Leading cause: Heart disease","58987 Leading cause: Heart disease","19191 Leading cause: Heart disease","1833 Leading cause: Heart disease","33192 Leading cause: Heart disease","11263 Leading cause: Heart disease","7263 Leading cause: Heart disease","41707 Leading cause: Heart disease","3008 Leading cause: Heart disease","9981 Leading cause: Heart disease","2024 Leading cause: Heart disease","16280 Leading cause: Heart disease","43418 Leading cause: Heart disease","725192 Leading cause: Heart disease","2786 Leading cause: Heart disease","1342 Leading cause: Heart disease","15329 Leading cause: Heart disease","11515 Leading cause: Heart disease","6822 Leading cause: Heart disease","13827 Leading cause: Heart disease","1009 Leading cause: Heart disease"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]}],"limits":{"lat":[20.46,61.3025006],"lng":[-158.7750198,-69.0148656]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b37e88973e3e1c78c7ea" style="width:700px;height:415.296px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b37e88973e3e1c78c7ea">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircles","args":[[32.6010112,61.3025006,34.1682185,34.7519275,37.2718745,38.9979339,41.5187835,39.145251,38.8993487,27.9757279,32.6781248,20.46,45.4945756,39.739318,39.7662195,41.9383166,38.4987789,37.8222935,30.9733766,45.2185133,38.8063524,42.0629398,44.9435598,46.4418595,32.5851062,38.3046615,46.6797995,41.5008195,38.502032,44.0012306,40.1430058,34.1662325,40.7056258,35.2145629,47.4678819,40.1903624,35.3097654,44.1419049,40.9945928,41.5827282,33.62505,44.2126995,35.830521,31.1693363,null,39.4997605,43.8717545,38.0033855,38.8993487,38.9201705,44.7862968,43.000325],[-86.6807365,-158.7750198,-111.930907,-92.1313784,-119.2704153,-105.550567,-72.757507,-75.4189206,-77.0145666,-83.8330166,-83.2229757,-157.505,-114.1424303,-89.504139,-86.441277,-93.389798,-98.3200779,-85.7682399,-91.4299097,-69.0148656,-77.2684162,-71.718067,-86.4158049,-93.3655146,-89.8772196,-92.437099,-110.044783,-99.680902,-117.0230604,-71.5799231,-74.7311156,-106.0260685,-73.97968,-79.8912675,-100.3022655,-82.6692525,-98.7165585,-120.5380993,-77.6046984,-71.5064508,-80.9470381,-100.2471641,-85.9785989,-100.0768425,null,-111.547028,-72.4477828,-79.4587861,-77.0145665,-80.1816905,-89.8267049,-107.5545669],600,null,null,{"interactive":true,"className":"","stroke":true,"color":["#C7E7F1","#A50026","#F7FBD0","#FEE495","#36429B","#FEBF70","#FFF0A8","#D62F27","#C22027","#3F5BA7","#88BCD9","#E85537","#ED603C","#4E7FB9","#93C5DE","#FFEA9F","#FFD283","#D2ECF4","#E4F4F1","#FA9253","#DCF1F7","#A8D6E8","#6194C5","#FFFCBA","#FFF6B1","#7DB4D5","#E24A31","#FEB567","#FDAA5F","#F36B42","#6A9FCA","#FB9E59","#3B4FA1","#72ABD0","#CC2827","#5889BF","#F1F9DB","#FEDC8C","#4574B3","#F8854D","#FCFEC5","#DC3D2C","#9DCEE3","#4267AD","#313695","#F67848","#B81827","#B2DDEB","#EBF7E6","#FEC97A","#BDE2EE","#AF0D26"],"weight":5,"opacity":1,"fill":true,"fillColor":["#C7E7F1","#A50026","#F7FBD0","#FEE495","#36429B","#FEBF70","#FFF0A8","#D62F27","#C22027","#3F5BA7","#88BCD9","#E85537","#ED603C","#4E7FB9","#93C5DE","#FFEA9F","#FFD283","#D2ECF4","#E4F4F1","#FA9253","#DCF1F7","#A8D6E8","#6194C5","#FFFCBA","#FFF6B1","#7DB4D5","#E24A31","#FEB567","#FDAA5F","#F36B42","#6A9FCA","#FB9E59","#3B4FA1","#72ABD0","#CC2827","#5889BF","#F1F9DB","#FEDC8C","#4574B3","#F8854D","#FCFEC5","#DC3D2C","#9DCEE3","#4267AD","#313695","#F67848","#B81827","#B2DDEB","#EBF7E6","#FEC97A","#BDE2EE","#AF0D26"],"fillOpacity":1},null,null,["13419 Leading cause: Heart disease","633 Leading cause: Cancer","10800 Leading cause: Heart disease","8315 Leading cause: Heart disease","71930 Leading cause: Heart disease","6420 Leading cause: Heart disease","9127 Leading cause: Heart disease","2011 Leading cause: Heart disease","1652 Leading cause: Heart disease","51434 Leading cause: Heart disease","17597 Leading cause: Heart disease","2410 Leading cause: Heart disease","2532 Leading cause: Heart disease","33387 Leading cause: Heart disease","16661 Leading cause: Heart disease","8699 Leading cause: Heart disease","6975 Leading cause: Heart disease","12098 Leading cause: Heart disease","12007 Leading cause: Heart disease","3418 Leading cause: Heart disease","12080 Leading cause: Heart disease","15871 Leading cause: Heart disease","27693 Leading cause: Heart disease","9533 Leading cause: Heart disease","9336 Leading cause: Heart disease","17974 Leading cause: Heart disease","2049 Leading cause: Heart disease","4497 Leading cause: Heart disease","4231 Leading cause: Heart disease","2751 Leading cause: Heart disease","23493 Leading cause: Heart disease","3452 Leading cause: Heart disease","58987 Leading cause: Heart disease","19191 Leading cause: Heart disease","1833 Leading cause: Heart disease","33192 Leading cause: Heart disease","11263 Leading cause: Heart disease","7263 Leading cause: Heart disease","41707 Leading cause: Heart disease","3008 Leading cause: Heart disease","9981 Leading cause: Heart disease","2024 Leading cause: Heart disease","16280 Leading cause: Heart disease","43418 Leading cause: Heart disease","725192 Leading cause: Heart disease","2786 Leading cause: Heart disease","1342 Leading cause: Heart disease","15329 Leading cause: Heart disease","11515 Leading cause: Heart disease","6822 Leading cause: Heart disease","13827 Leading cause: Heart disease","1009 Leading cause: Heart disease"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]}],"limits":{"lat":[20.46,61.3025006],"lng":[-158.7750198,-69.0148656]}},"evals":[],"jsHooks":[]}</script>
 <p>Take more closer look at 1999 year data</p>
-<pre class="r"><code>knitr::kable(table(data1999$`Cause Name`))</code></pre>
+<pre class="r code-r"><code>knitr::kable(table(data1999$`Cause Name`))</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -857,7 +856,7 @@ leaflet(data1999) %&gt;%
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>region1999&lt;- data1999 %&gt;%
+<pre class="r code-r"><code>region1999&lt;- data1999 %&gt;%
   group_by(Region) %&gt;%
   summarise(sum(Deaths))%&gt;%
   replace_na(list(Region = &quot;US total&quot;))
@@ -901,11 +900,11 @@ knitr::kable(region1999)</code></pre>
 </div>
 <div id="section-1" class="section level3">
 <h3>2017</h3>
-<pre class="r"><code>data2017&lt;- alldata %&gt;%
+<pre class="r code-r"><code>data2017&lt;- alldata %&gt;%
   group_by(State) %&gt;%
   filter(Year ==2017, `Cause Name` != &quot;All causes&quot;) %&gt;%
   filter(Deaths == max(Deaths))</code></pre>
-<pre class="r"><code>pal2 &lt;- colorFactor(c(&#39;cyan3&#39;,&#39;goldenrod2&#39;),domain=data2017$Deaths)
+<pre class="r code-r"><code>pal2 &lt;- colorFactor(c(&#39;cyan3&#39;,&#39;goldenrod2&#39;),domain=data2017$Deaths)
 
 leaflet(data2017) %&gt;% 
   addProviderTiles(&#39;CartoDB.Positron&#39;) %&gt;%
@@ -915,10 +914,10 @@ leaflet(data2017) %&gt;%
     label = ~paste0(Deaths, &#39; Leading cause: &#39;, `Cause Name` ),
     opacity =1, fillOpacity=1, radius=600
   ) </code></pre>
-<div id="htmlwidget-da0be5f0ffb802cc7cd9" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-da0be5f0ffb802cc7cd9">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircles","args":[[32.6010112,61.3025006,34.1682185,34.7519275,37.2718745,38.9979339,41.5187835,39.145251,38.8993487,27.9757279,32.6781248,20.46,45.4945756,39.739318,39.7662195,41.9383166,38.4987789,37.8222935,30.9733766,45.2185133,38.8063524,42.0629398,44.9435598,46.4418595,32.5851062,38.3046615,46.6797995,41.5008195,38.502032,44.0012306,40.1430058,34.1662325,40.7056258,35.2145629,47.4678819,40.1903624,35.3097654,44.1419049,40.9945928,41.5827282,33.62505,44.2126995,35.830521,31.1693363,null,39.4997605,43.8717545,38.0033855,38.8993487,38.9201705,44.7862968,43.000325],[-86.6807365,-158.7750198,-111.930907,-92.1313784,-119.2704153,-105.550567,-72.757507,-75.4189206,-77.0145666,-83.8330166,-83.2229757,-157.505,-114.1424303,-89.504139,-86.441277,-93.389798,-98.3200779,-85.7682399,-91.4299097,-69.0148656,-77.2684162,-71.718067,-86.4158049,-93.3655146,-89.8772196,-92.437099,-110.044783,-99.680902,-117.0230604,-71.5799231,-74.7311156,-106.0260685,-73.97968,-79.8912675,-100.3022655,-82.6692525,-98.7165585,-120.5380993,-77.6046984,-71.5064508,-80.9470381,-100.2471641,-85.9785989,-100.0768425,null,-111.547028,-72.4477828,-79.4587861,-77.0145665,-80.1816905,-89.8267049,-107.5545669],600,null,null,{"interactive":true,"className":"","stroke":true,"color":["#CCBD63","#00CDCD","#C4BE6D","#AEC285","#ECB528","#A4C48E","#9EC594","#5ECABB","#36CCC7","#EAB52D","#D7BA52","#71C9B2","#7CC8AC","#E0B843","#CEBC60","#A1C491","#96C69A","#B4C17F","#BDC076","#81C8A9","#BFBF73","#C9BD66","#DEB947","#B1C282","#A8C38B","#D1BC5C","#65CAB8","#85C7A6","#9AC597","#77C9AF","#DABA4E","#8EC6A0","#E6B637","#DCB94B","#43CCC4","#E2B73F","#BAC079","#ABC388","#E4B73B","#6BCAB5","#B7C17C","#56CBBE","#D5BB55","#E8B632","#EEB422","#8AC7A3","#4DCBC1","#D3BB59","#C7BE69","#92C69D","#C2BF70","#25CDCA"],"weight":5,"opacity":1,"fill":true,"fillColor":["#CCBD63","#00CDCD","#C4BE6D","#AEC285","#ECB528","#A4C48E","#9EC594","#5ECABB","#36CCC7","#EAB52D","#D7BA52","#71C9B2","#7CC8AC","#E0B843","#CEBC60","#A1C491","#96C69A","#B4C17F","#BDC076","#81C8A9","#BFBF73","#C9BD66","#DEB947","#B1C282","#A8C38B","#D1BC5C","#65CAB8","#85C7A6","#9AC597","#77C9AF","#DABA4E","#8EC6A0","#E6B637","#DCB94B","#43CCC4","#E2B73F","#BAC079","#ABC388","#E4B73B","#6BCAB5","#B7C17C","#56CBBE","#D5BB55","#E8B632","#EEB422","#8AC7A3","#4DCBC1","#D3BB59","#C7BE69","#92C69D","#C2BF70","#25CDCA"],"fillOpacity":1},null,null,["13110 Leading cause: Heart disease","926 Leading cause: Cancer","12398 Leading cause: Heart disease","8270 Leading cause: Heart disease","62797 Leading cause: Heart disease","7829 Leading cause: Cancer","7138 Leading cause: Heart disease","2085 Leading cause: Cancer","1284 Leading cause: Heart disease","46440 Leading cause: Heart disease","18389 Leading cause: Heart disease","2575 Leading cause: Heart disease","3084 Leading cause: Heart disease","25394 Leading cause: Heart disease","14445 Leading cause: Heart disease","7180 Leading cause: Heart disease","5723 Leading cause: Heart disease","10343 Leading cause: Heart disease","11260 Leading cause: Heart disease","3391 Leading cause: Cancer","11653 Leading cause: Heart disease","12934 Leading cause: Cancer","25187 Leading cause: Heart disease","9896 Leading cause: Cancer","7944 Leading cause: Heart disease","14820 Leading cause: Heart disease","2164 Leading cause: Heart disease","3581 Leading cause: Heart disease","6417 Leading cause: Heart disease","2760 Leading cause: Cancer","18840 Leading cause: Heart disease","3896 Leading cause: Heart disease","44092 Leading cause: Heart disease","19474 Leading cause: Cancer","1326 Leading cause: Heart disease","28008 Leading cause: Heart disease","10772 Leading cause: Heart disease","8083 Leading cause: Cancer","32312 Leading cause: Heart disease","2339 Leading cause: Heart disease","10418 Leading cause: Heart disease","1715 Leading cause: Cancer","16019 Leading cause: Heart disease","45346 Leading cause: Heart disease","647457 Leading cause: Heart disease","3749 Leading cause: Heart disease","1434 Leading cause: Cancer","15064 Leading cause: Cancer","12664 Leading cause: Cancer","4849 Leading cause: Heart disease","11860 Leading cause: Heart disease","1001 Leading cause: Heart disease"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]}],"limits":{"lat":[20.46,61.3025006],"lng":[-158.7750198,-69.0148656]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-537452aed50016def754" style="width:700px;height:415.296px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-537452aed50016def754">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircles","args":[[32.6010112,61.3025006,34.1682185,34.7519275,37.2718745,38.9979339,41.5187835,39.145251,38.8993487,27.9757279,32.6781248,20.46,45.4945756,39.739318,39.7662195,41.9383166,38.4987789,37.8222935,30.9733766,45.2185133,38.8063524,42.0629398,44.9435598,46.4418595,32.5851062,38.3046615,46.6797995,41.5008195,38.502032,44.0012306,40.1430058,34.1662325,40.7056258,35.2145629,47.4678819,40.1903624,35.3097654,44.1419049,40.9945928,41.5827282,33.62505,44.2126995,35.830521,31.1693363,null,39.4997605,43.8717545,38.0033855,38.8993487,38.9201705,44.7862968,43.000325],[-86.6807365,-158.7750198,-111.930907,-92.1313784,-119.2704153,-105.550567,-72.757507,-75.4189206,-77.0145666,-83.8330166,-83.2229757,-157.505,-114.1424303,-89.504139,-86.441277,-93.389798,-98.3200779,-85.7682399,-91.4299097,-69.0148656,-77.2684162,-71.718067,-86.4158049,-93.3655146,-89.8772196,-92.437099,-110.044783,-99.680902,-117.0230604,-71.5799231,-74.7311156,-106.0260685,-73.97968,-79.8912675,-100.3022655,-82.6692525,-98.7165585,-120.5380993,-77.6046984,-71.5064508,-80.9470381,-100.2471641,-85.9785989,-100.0768425,null,-111.547028,-72.4477828,-79.4587861,-77.0145665,-80.1816905,-89.8267049,-107.5545669],600,null,null,{"interactive":true,"className":"","stroke":true,"color":["#CCBD63","#00CDCD","#C4BE6D","#AEC285","#ECB528","#A4C48E","#9EC594","#5ECABB","#36CCC7","#EAB52D","#D7BA52","#71C9B2","#7CC8AC","#E0B843","#CEBC60","#A1C491","#96C69A","#B4C17F","#BDC076","#81C8A9","#BFBF73","#C9BD66","#DEB947","#B1C282","#A8C38B","#D1BC5C","#65CAB8","#85C7A6","#9AC597","#77C9AF","#DABA4E","#8EC6A0","#E6B637","#DCB94B","#43CCC4","#E2B73F","#BAC079","#ABC388","#E4B73B","#6BCAB5","#B7C17C","#56CBBE","#D5BB55","#E8B632","#EEB422","#8AC7A3","#4DCBC1","#D3BB59","#C7BE69","#92C69D","#C2BF70","#25CDCA"],"weight":5,"opacity":1,"fill":true,"fillColor":["#CCBD63","#00CDCD","#C4BE6D","#AEC285","#ECB528","#A4C48E","#9EC594","#5ECABB","#36CCC7","#EAB52D","#D7BA52","#71C9B2","#7CC8AC","#E0B843","#CEBC60","#A1C491","#96C69A","#B4C17F","#BDC076","#81C8A9","#BFBF73","#C9BD66","#DEB947","#B1C282","#A8C38B","#D1BC5C","#65CAB8","#85C7A6","#9AC597","#77C9AF","#DABA4E","#8EC6A0","#E6B637","#DCB94B","#43CCC4","#E2B73F","#BAC079","#ABC388","#E4B73B","#6BCAB5","#B7C17C","#56CBBE","#D5BB55","#E8B632","#EEB422","#8AC7A3","#4DCBC1","#D3BB59","#C7BE69","#92C69D","#C2BF70","#25CDCA"],"fillOpacity":1},null,null,["13110 Leading cause: Heart disease","926 Leading cause: Cancer","12398 Leading cause: Heart disease","8270 Leading cause: Heart disease","62797 Leading cause: Heart disease","7829 Leading cause: Cancer","7138 Leading cause: Heart disease","2085 Leading cause: Cancer","1284 Leading cause: Heart disease","46440 Leading cause: Heart disease","18389 Leading cause: Heart disease","2575 Leading cause: Heart disease","3084 Leading cause: Heart disease","25394 Leading cause: Heart disease","14445 Leading cause: Heart disease","7180 Leading cause: Heart disease","5723 Leading cause: Heart disease","10343 Leading cause: Heart disease","11260 Leading cause: Heart disease","3391 Leading cause: Cancer","11653 Leading cause: Heart disease","12934 Leading cause: Cancer","25187 Leading cause: Heart disease","9896 Leading cause: Cancer","7944 Leading cause: Heart disease","14820 Leading cause: Heart disease","2164 Leading cause: Heart disease","3581 Leading cause: Heart disease","6417 Leading cause: Heart disease","2760 Leading cause: Cancer","18840 Leading cause: Heart disease","3896 Leading cause: Heart disease","44092 Leading cause: Heart disease","19474 Leading cause: Cancer","1326 Leading cause: Heart disease","28008 Leading cause: Heart disease","10772 Leading cause: Heart disease","8083 Leading cause: Cancer","32312 Leading cause: Heart disease","2339 Leading cause: Heart disease","10418 Leading cause: Heart disease","1715 Leading cause: Cancer","16019 Leading cause: Heart disease","45346 Leading cause: Heart disease","647457 Leading cause: Heart disease","3749 Leading cause: Heart disease","1434 Leading cause: Cancer","15064 Leading cause: Cancer","12664 Leading cause: Cancer","4849 Leading cause: Heart disease","11860 Leading cause: Heart disease","1001 Leading cause: Heart disease"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]}],"limits":{"lat":[20.46,61.3025006],"lng":[-158.7750198,-69.0148656]}},"evals":[],"jsHooks":[]}</script>
 <p>Take closer look at 2017 data</p>
-<pre class="r"><code>knitr::kable(table(data2017$`Cause Name`))</code></pre>
+<pre class="r code-r"><code>knitr::kable(table(data2017$`Cause Name`))</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -937,7 +936,7 @@ leaflet(data2017) %&gt;%
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>region2017&lt;- data2017 %&gt;%
+<pre class="r code-r"><code>region2017&lt;- data2017 %&gt;%
   group_by(Region) %&gt;%
   summarise(sum(Deaths))%&gt;%
   replace_na(list(Region = &quot;US total&quot;))

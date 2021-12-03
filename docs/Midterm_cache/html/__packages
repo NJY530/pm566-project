@@ -12,3 +12,6 @@ tidytext
 data.table
 httr
 leaflet
+plotly
+DT
+knitr
