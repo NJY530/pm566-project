@@ -1,0 +1,290 @@
+---
+title: "PM566 Final Project"
+author: "Jiayi Nie"
+date: 12/03/2021
+output: 
+    html_document:
+        toc: TRUE
+        toc_float: TRUE
+---
+
+<br>
+```{r setup, include=FALSE, message=FALSE, echo=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+library(tidyverse)
+library(tidytext)
+library(data.table)
+library(httr)
+library(leaflet)
+library(dplyr)
+library(plotly)
+library(DT)
+library(knitr)
+
+# INITALIZE CODE CHUNK OPTIONS
+opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  eval=TRUE,
+  echo = TRUE,
+  cache = FALSE,
+  fig.width = 7, 
+  fig.align = 'center',
+  fig.asp = 0.618,
+  out.width = "700px",
+  class.source = "code-r")
+```
+
+```{css, echo = FALSE}
+.code-r { /* Code block */
+  font-size: 15px;
+}
+
+.code-r-small { /* Code block */
+  font-size: 10px;
+}
+```
+<br>
+
+# Intro
+  The dataset used for this project presents the age-adjusted death rates for the 10 leading causes of death in the United States beginning from 1999 to 2017. Causes of death are classified by the International Classification of Diseases. Cause of death statistics are based on the underlying cause of death. Access from CDC (https://data.cdc.gov/NCHS/NCHS-Leading-Causes-of-Death-United-States/bi63-dtpu)
+  
+  Since it's hard to demonstrate all 51 states clearly, introduce the United States regions dataset which contains all 51 states, and groups them into 5 regions according to their geographic position on the continent: the Northeast, Southwest, West, Southeast, and Midwest. (ref: https://www.nationalgeographic.org/maps/united-states-regions/) 
+(data source:https://www.kaggle.com/omer2040/usa-states-to-region)
+  
+  Also, use the US state location dataset in this project. (data resource: https://www.kaggle.com/washimahmed/usa-latlong-for-state-abbreviations)
+
+  In this project, we will discuss and explore the leading death cause in the United States and how it changes as year passes. The purpose of this study is to figure out the death rate change pattern for the whole country and assess what cause of death we should pay more attention to. In other words, how did the leading cause of death nowadays (in 2017) different from 18 years ago (in 1999) in each region?
+  The research questions and hypothesis for this project to examine and analyze are:
+  
+  * [Examine hypothesis] Examine whether the death rate of all-cause death rate follows a decreasing trend in the whole United States and each state. If there is an exception, state them.
+  * [Question] Illustrate the leading cause of death with highest death number in 2017 and 1999 respectively, state how the leading death cause changes in following aspects:
+      + What's the most common death cause in 1999 among the whole US? How about 2017?
+      + What's the region with the highest death number in 2017? 
+
+Then from time, region(state), and cause of death, three aspects draw our conclusion.
+
+<br>
+
+----
+
+# Method
+
+The dataset resource is included in the intro part. We will use the EDA checklist to clean and wrangle our data. We are primarily used ggplot and leaflet to do the data visualization to explore data.
+
+## Data loading
+```{r data loading, cache=TRUE}
+if (!file.exists("bi63-dtpu.csv"))
+  download.file(
+    url = "https://data.cdc.gov/api/views/bi63-dtpu/rows.csv",
+    destfile = "bi63-dtpu.csv",
+    method   = "libcurl",
+    timeout  = 60
+    )
+data <- data.table::fread("bi63-dtpu.csv")
+
+region <- data.table::fread("https://raw.githubusercontent.com/NJY530/pm566-project/main/Midterm/USAregion2.csv")
+
+location <- data.table::fread("https://raw.githubusercontent.com/NJY530/pm566-project/main/Midterm/USAlocation.csv")
+```
+
+## Data wrangling and cleaning
+
+Checking the dimension, headers and footers of the data
+```{r dimension, header and footer}
+knitr::kable(dim(data))
+knitr::kable(head(data))
+knitr::kable(tail(data))
+```
+
+It includes 10.9K rows and 6 column:column information:Year, 113 cause name, Cause name, State, Deaths, Age-adjusted death rate
+
+
+Check how many category in key columns (Cause name and State)
+
+```{r}
+cate1 <- unique(data$`Cause Name`)
+knitr::kables(list(as.array(cate1),length(cate1)))
+cate2<- unique(data$State)
+knitr::kables(list(as.data.frame(cate2),length(cate2)))
+```
+There are 10 causes of death (1 extra is "All-cause"), 51 states (including District of Columbia) ,and the whole US data included in this dataset.
+
+
+Check NA
+```{r checking NA}
+d1 = summary(is.na(data))
+d2 = summary(data)
+knitr::kable(rbind(d1,d2))
+```
+
+There is no NA. Next create a new variable with state region category and location information
+
+```{r merge data}
+d_region<-merge(
+  x=data,
+  y=region,
+  by.x= "State",
+  by.y = "State",
+  all.x = TRUE,
+  all.y = FALSE
+)
+
+alldata <- merge(
+  x=d_region,
+  y=location,
+  by.x = "State",
+  by.y = "City",
+  all.x=TRUE,
+  all.y=FALSE
+)
+
+```
+
+We already know that there is a "United States" category in "State" in our original data, check if there is 209 NA in our new colunm to test the merge result.
+```{r replace new NA}
+knitr::kable(summary(is.na(alldata)))
+```
+
+<br>
+
+----
+
+# Data exploration and Preliminary Results
+
+In this section, we will explore the death rate changing pattern from three perspectives: time, region and leading cause.
+
+<br>
+
+## Line chart - Death rate change pattern over time
+
+- Extra all causes data and create a new dataset `allcause`
+- Use `Plotly` to draw line chart (year vs death rate) and grouped by states, should have 52 lines in total
+
+```{r all cause dataset}
+allcause<- alldata %>%
+  filter(alldata$`Cause Name` == "All causes")
+```
+
+```{r line chart}
+linechart <- ggplot(allcause) +
+  geom_line(mapping = aes(x=allcause$`Year`, y = allcause$`Age-adjusted Death`, color=State))+
+  labs(title = "Death rate change in each state and the whole US from 1999 to 2017",x="year", y ="death rate", size = 10)
+ggplotly(linechart)
+```
+
+This graph indicates all 51 states and the whole United states' death rate change during 18 years. According to this graph, all 51 states follow a downward trend which meets our hypothesis that as time changes, the level of medical care has improved, and the mortality rate has shown a downward trend.
+
+<br>
+
+## Map - Death rate chaning pattern in each state {.tabset}
+
+- Create maps to visualize `Age-adjusted Death Rate` by `State` in 1999 and 2017 respectively
+
+
+```{r 1999 data}
+#Extract data for each state in 1999
+data1999<- alldata %>%
+  group_by(State) %>%
+  filter(Year ==1999, `Cause Name` == "All causes")%>%
+  select(State,`Age-adjusted Death Rate`, Deaths, `State Code`)
+
+#Create hover text
+data1999$hover <- with(data1999, paste(State, '<br>', "Age-adjusted Death Rate: ", `Age-adjusted Death Rate`, '<br>', "All-cause Death number: ", Deaths))
+
+#Set up mapping details
+set_map_details <- list(
+  scope = 'usa',
+  projection = list(type = 'albers usa'),
+  showlakes = TRUE,
+  lakecolor = toRGB('white')
+)
+
+fig <- plot_geo(data1999, locationmode = 'USA-states') %>% 
+  add_trace(
+    z = ~`Age-adjusted Death Rate`, text = ~hover, locations = ~`State Code`,
+    color = ~`Age-adjusted Death Rate`, colors = 'Reds'
+  )
+
+fig <- fig %>% colorbar(title = "Age-adjusted Death Rate in 1999", limits = c(550,1100))
+fig <- fig %>% layout(
+    title = 'Age-adjusted Death Rate in 1999',
+    geo = set_map_details
+  )
+
+fig_1999 <- fig
+
+```
+
+
+```{r map2017}
+#Extract data for each state in 2017
+data2017<- alldata %>%
+  group_by(State) %>%
+  filter(Year ==2017, `Cause Name` == "All causes")%>%
+  select(State,`Age-adjusted Death Rate`, Deaths, `State Code`)
+
+#Create hover text
+data2017$hover <- with(data2017, paste(State, '<br>', "Age-adjusted Death Rate: ", `Age-adjusted Death Rate`, '<br>', "All-cause Death number: ", Deaths))
+
+#Set up mapping details
+set_map_details <- list(
+  scope = 'usa',
+  projection = list(type = 'albers usa'),
+  showlakes = TRUE,
+  lakecolor = toRGB('white')
+)
+
+fig <- plot_geo(data2017, locationmode = 'USA-states') %>% 
+  add_trace(
+    z = ~`Age-adjusted Death Rate`, text = ~hover, locations = ~`State Code`,
+    color = ~`Age-adjusted Death Rate`, colors = 'Reds'
+  )
+
+fig <- fig %>% colorbar(title = "Age-adjusted Death Rate in 2017", limits = c(550,1100))
+fig <- fig %>% layout(
+    title = 'Age-adjusted Death Rate in 2017',
+    geo = set_map_details
+  )
+
+fig_2017 <- fig
+
+```
+
+### Age-adjusted Death Rate Map in 1999
+
+```{r echo=FALSE}
+fig_1999
+```
+
+### Age-adjusted Death Rate Map in 2017
+
+```{r echo=FALSE}
+fig_2017
+```
+
+## {-}
+
+
+
+## Scatter plot - Death Rate chaning pattern in resepect of causes
+
+
+
+
+
+
+
+
+
+# Brief Conclusion
+
+Now we could draw a preliminary conclusion to our question:
+
+* It's apparently that all death rate went down in the past 18 years in all 51 states
+
+* Compared to 1999, the death number decrease in 2017. However, there is an exception that the death number in region **southwest** increase from 68933 to 72412. Possible reason might be the increase population in this region. Could take closer look combined with some external information next step.
+
+* From the geographic aspect, the pattern did not change. The order of death number in these five region is still **Southeast > Midwest > Northwest > West > Southwest** It's worth noting that, southwest has significant low number compared to other 4. Could combined with population data and state death rate data to check whether the low number comes from low population or low disease incidence. (we don't know the region population, so could not sum all death rate up for now)
+
+* From the disease cause aspect, in 1999, the most fatal death cause is heart disease which becoming leading cause in 50 states. In 2017, Cancer catchs up a little. This might indicate that nowadays cancer should pay more attention to. 

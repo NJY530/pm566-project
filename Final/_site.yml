@@ -1,0 +1,15 @@
+name: "my-website"
+output_dir: "."
+navbar:
+  title: "PM566 Final Project"
+  left:
+    - text: "Final Website"
+      href: index.html
+    - text: "Midterm Website"
+      href: Midterm.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/NJY530/pm566-project
+output:
+  html_document:
+    theme: cosmo

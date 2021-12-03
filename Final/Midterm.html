@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jiayi Nie" />
+
+<meta name="date" content="2021-10-19" />
+
+<title>Midterm - Leading Causes of Death: United States</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="site_libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="site_libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="site_libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PM566 Final Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Final Website</a>
+</li>
+<li>
+  <a href="Midterm.html">Midterm Website</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/NJY530/pm566-project">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Midterm - Leading Causes of Death: United States</h1>
+<h4 class="author">Jiayi Nie</h4>
+<h4 class="date">10/19/2021</h4>
+
+</div>
+
+
+<p><br></p>
+<div id="intro" class="section level1">
+<h1>Intro</h1>
+<p>The dataset used for this project presents the age-adjusted death rates for the 10 leading causes of death in the United States beginning in 1999 till 2017. Causes of death classified by the International Classification of Diseases. Cause of death statistics are based on the underlying cause of death. Access from CDC (<a href="https://data.cdc.gov/NCHS/NCHS-Leading-Causes-of-Death-United-States/bi63-dtpu" class="uri">https://data.cdc.gov/NCHS/NCHS-Leading-Causes-of-Death-United-States/bi63-dtpu</a>)</p>
+<p>Since it’s hard to demonstrate all 51 states clearly, introduce United States regions dataset which contains all 51 states and groups them into 5 regions according to their geographic position on the continent: the Northeast, Southwest, West, Southeast, and Midwest. (ref: <a href="https://www.nationalgeographic.org/maps/united-states-regions/" class="uri">https://www.nationalgeographic.org/maps/united-states-regions/</a>) (data source:<a href="https://www.kaggle.com/omer2040/usa-states-to-region" class="uri">https://www.kaggle.com/omer2040/usa-states-to-region</a>)</p>
+<p>Also use US state location dataset in this project. (data resource: <a href="https://www.kaggle.com/washimahmed/usa-latlong-for-state-abbreviations" class="uri">https://www.kaggle.com/washimahmed/usa-latlong-for-state-abbreviations</a>)</p>
+<p>In this project we will discuss and explore the leading death cause in United State and how doese it change as year past. The purpose of this study is try to figure out the death rate change pattern for the whole country and assess what cause of death should we pay more attention to. In other word, how did the leading cause of death nowadays (in 2017) different from 18 years ago (in 1999) in each region. The research questions and hypothesis for this project to examine and analyze are:</p>
+<ul>
+<li>Examine whether the death rate of all-cause death rate follow decrease trend in the whole United State and each state. If there is exception, state them.</li>
+<li>Illustrate the leading cause of death with highest death number in 2017 and 1999 respectively, state how the leading death cause changes in following aspects:
+<ul>
+<li>What’s the most common death cause in 1999 among whole US, how about 2017?</li>
+<li>What’s the region with highest death number in 2017?</li>
+</ul></li>
+</ul>
+<p>Then from time, region(state) and cause of death three aspect draw our conclusion.</p>
+<p><br></p>
+<hr />
+</div>
+<div id="method" class="section level1">
+<h1>Method</h1>
+<p>The dataset resource are included in the intro part. In this part we will use EDA checklist to clean and wrangle our data. Primarily used ggplot and leaflet do the data visualization to explore data.</p>
+<div id="data-loading" class="section level2">
+<h2>Data loading</h2>
+<pre class="r"><code>if (!file.exists(&quot;bi63-dtpu.csv&quot;))
+  download.file(
+    url = &quot;https://data.cdc.gov/api/views/bi63-dtpu/rows.csv&quot;,
+    destfile = &quot;bi63-dtpu.csv&quot;,
+    method   = &quot;libcurl&quot;,
+    timeout  = 60
+    )
+data &lt;- data.table::fread(&quot;bi63-dtpu.csv&quot;)
+
+region &lt;- data.table::fread(&quot;https://raw.githubusercontent.com/NJY530/pm566-project/main/Midterm/USAregion2.csv&quot;)
+
+location &lt;- data.table::fread(&quot;https://raw.githubusercontent.com/NJY530/pm566-project/main/Midterm/USAlocation.csv&quot;)</code></pre>
+</div>
+<div id="data-wrangling-and-cleaning" class="section level2">
+<h2>Data wrangling and cleaning</h2>
+<p>Checking the dimension, headers and footers of the data</p>
+<pre class="r"><code>knitr::kable(dim(data))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">10868</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>knitr::kable(head(data))</code></pre>
+<table>
+<colgroup>
+<col width="3%" />
+<col width="42%" />
+<col width="18%" />
+<col width="11%" />
+<col width="5%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">Year</th>
+<th align="left">113 Cause Name</th>
+<th align="left">Cause Name</th>
+<th align="left">State</th>
+<th align="right">Deaths</th>
+<th align="right">Age-adjusted Death Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">Accidents (unintentional injuries) (V01-X59,Y85-Y86)</td>
+<td align="left">Unintentional injuries</td>
+<td align="left">United States</td>
+<td align="right">169936</td>
+<td align="right">49.4</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="left">Accidents (unintentional injuries) (V01-X59,Y85-Y86)</td>
+<td align="left">Unintentional injuries</td>
+<td align="left">Alabama</td>
+<td align="right">2703</td>
+<td align="right">53.8</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">Accidents (unintentional injuries) (V01-X59,Y85-Y86)</td>
+<td align="left">Unintentional injuries</td>
+<td align="left">Alaska</td>
+<td align="right">436</td>
+<td align="right">63.7</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="left">Accidents (unintentional injuries) (V01-X59,Y85-Y86)</td>
+<td align="left">Unintentional injuries</td>
+<td align="left">Arizona</td>
+<td align="right">4184</td>
+<td align="right">56.2</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">Accidents (unintentional injuries) (V01-X59,Y85-Y86)</td>
+<td align="left">Unintentional injuries</td>
+<td align="left">Arkansas</td>
+<td align="right">1625</td>
+<td align="right">51.8</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="left">Accidents (unintentional injuries) (V01-X59,Y85-Y86)</td>
+<td align="left">Unintentional injuries</td>
+<td align="left">California</td>
+<td align="right">13840</td>
+<td align="right">33.2</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>knitr::kable(tail(data))</code></pre>
+<table>
+<colgroup>
+<col width="3%" />
+<col width="51%" />
+<col width="11%" />
+<col width="10%" />
+<col width="5%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">Year</th>
+<th align="left">113 Cause Name</th>
+<th align="left">Cause Name</th>
+<th align="left">State</th>
+<th align="right">Deaths</th>
+<th align="right">Age-adjusted Death Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1999</td>
+<td align="left">Nephritis, nephrotic syndrome and nephrosis (N00-N07,N17-N19,N25-N27)</td>
+<td align="left">Kidney disease</td>
+<td align="left">Vermont</td>
+<td align="right">56</td>
+<td align="right">9.2</td>
+</tr>
+<tr class="even">
+<td align="right">1999</td>
+<td align="left">Nephritis, nephrotic syndrome and nephrosis (N00-N07,N17-N19,N25-N27)</td>
+<td align="left">Kidney disease</td>
+<td align="left">Virginia</td>
+<td align="right">1035</td>
+<td align="right">16.9</td>
+</tr>
+<tr class="odd">
+<td align="right">1999</td>
+<td align="left">Nephritis, nephrotic syndrome and nephrosis (N00-N07,N17-N19,N25-N27)</td>
+<td align="left">Kidney disease</td>
+<td align="left">Washington</td>
+<td align="right">278</td>
+<td align="right">5.2</td>
+</tr>
+<tr class="even">
+<td align="right">1999</td>
+<td align="left">Nephritis, nephrotic syndrome and nephrosis (N00-N07,N17-N19,N25-N27)</td>
+<td align="left">Kidney disease</td>
+<td align="left">West Virginia</td>
+<td align="right">345</td>
+<td align="right">16.4</td>
+</tr>
+<tr class="odd">
+<td align="right">1999</td>
+<td align="left">Nephritis, nephrotic syndrome and nephrosis (N00-N07,N17-N19,N25-N27)</td>
+<td align="left">Kidney disease</td>
+<td align="left">Wisconsin</td>
+<td align="right">677</td>
+<td align="right">11.9</td>
+</tr>
+<tr class="even">
+<td align="right">1999</td>
+<td align="left">Nephritis, nephrotic syndrome and nephrosis (N00-N07,N17-N19,N25-N27)</td>
+<td align="left">Kidney disease</td>
+<td align="left">Wyoming</td>
+<td align="right">30</td>
+<td align="right">6.8</td>
+</tr>
+</tbody>
+</table>
+<p>It includes 10.9K rows and 6 column:column information:Year, 113 cause name, Cause name, State, Deaths, Age-adjusted death rate</p>
+<p>Check how many category in key colunmns (Cause name and State)</p>
+<pre class="r"><code>cate1 &lt;- unique(data$`Cause Name`)
+knitr::kables(list(as.array(cate1),length(cate1)))</code></pre>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<p>Unintentional injuries All causes Alzheimer’s disease Stroke CLRD Diabetes Heart disease Influenza and pneumonia Suicide Cancer Kidney disease</p>
+</td>
+<td>
+<p>11</p>
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>cate2&lt;- unique(data$State)
+knitr::kables(list(as.data.frame(cate2),length(cate2)))</code></pre>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<p>c(“United States”, “Alabama”, “Alaska”, “Arizona”, “Arkansas”, “California”, “Colorado”, “Connecticut”, “Delaware”, “District of Columbia”, “Florida”, “Georgia”, “Hawaii”, “Idaho”, “Illinois”, “Indiana”, “Iowa”, “Kansas”, “Kentucky”, “Louisiana”, “Maine”, “Maryland”, “Massachusetts”, “Michigan”, “Minnesota”, “Mississippi”, “Missouri”, “Montana”, “Nebraska”, “Nevada”, “New Hampshire”, “New Jersey”, “New Mexico”, “New York”, “North Carolina”, “North Dakota”, “Ohio”, “Oklahoma”, “Oregon”, “Pennsylvania”, “Rhode Island”, “South Carolina”, “South Dakota”, “Tennessee”, “Texas”, “Utah”, “Vermont”, “Virginia”, “Washington”, “West Virginia”, “Wisconsin”, “Wyoming”)</p>
+</td>
+<td>
+<p>52</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>There are 10 causes of death (1 extra is “All-cause”) and 51 states (including District of Columbia) and the whole US included in this dataset.</p>
+<p>Check NA</p>
+<pre class="r"><code>d1 = summary(is.na(data))
+d2 = summary(data)
+knitr::kable(rbind(d1,d2))</code></pre>
+<table>
+<colgroup>
+<col width="2%" />
+<col width="12%" />
+<col width="15%" />
+<col width="15%" />
+<col width="15%" />
+<col width="14%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Year</th>
+<th align="left">113 Cause Name</th>
+<th align="left">Cause Name</th>
+<th align="left">State</th>
+<th align="left">Deaths</th>
+<th align="left">Age-adjusted Death Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">FALSE:10868</td>
+<td align="left">FALSE:10868</td>
+<td align="left">FALSE:10868</td>
+<td align="left">FALSE:10868</td>
+<td align="left">FALSE:10868</td>
+<td align="left">FALSE:10868</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">Min. :1999</td>
+<td align="left">Length:10868</td>
+<td align="left">Length:10868</td>
+<td align="left">Length:10868</td>
+<td align="left">Min. : 21</td>
+<td align="left">Min. : 2.6</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">1st Qu.:2003</td>
+<td align="left">Class :character</td>
+<td align="left">Class :character</td>
+<td align="left">Class :character</td>
+<td align="left">1st Qu.: 612</td>
+<td align="left">1st Qu.: 19.2</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">Median :2008</td>
+<td align="left">Mode :character</td>
+<td align="left">Mode :character</td>
+<td align="left">Mode :character</td>
+<td align="left">Median : 1718</td>
+<td align="left">Median : 35.9</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">Mean :2008</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Mean : 15460</td>
+<td align="left">Mean : 127.6</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">3rd Qu.:2013</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">3rd Qu.: 5756</td>
+<td align="left">3rd Qu.: 151.7</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">Max. :2017</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Max. :2813503</td>
+<td align="left">Max. :1087.3</td>
+</tr>
+</tbody>
+</table>
+<p>There is no NA. Next create a new variable with state region category and location information</p>
+<pre class="r"><code>d_region&lt;-merge(
+  x=data,
+  y=region,
+  by.x= &quot;State&quot;,
+  by.y = &quot;State&quot;,
+  all.x = TRUE,
+  all.y = FALSE
+)
+
+alldata &lt;- merge(
+  x=d_region,
+  y=location,
+  by.x = &quot;State&quot;,
+  by.y = &quot;City&quot;,
+  all.x=TRUE,
+  all.y=FALSE
+)</code></pre>
+<p>We already know that there is a “United States” category in “State” in our original data, check if there is 209 NA in our new colunm to test the merge result.</p>
+<pre class="r"><code>knitr::kable(summary(is.na(alldata)))</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col width="1%" />
+<col width="7%" />
+<col width="7%" />
+<col width="8%" />
+<col width="7%" />
+<col width="7%" />
+<col width="13%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">State</th>
+<th align="left">Year</th>
+<th align="left">113 Cause Name</th>
+<th align="left">Cause Name</th>
+<th align="left">Deaths</th>
+<th align="left">Age-adjusted Death Rate</th>
+<th align="left">State Code</th>
+<th align="left">Region</th>
+<th align="left">Division</th>
+<th align="left">State.y</th>
+<th align="left">Latitude</th>
+<th align="left">Longitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+<td align="left">Mode :logical</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">FALSE:10868</td>
+<td align="left">FALSE:10868</td>
+<td align="left">FALSE:10868</td>
+<td align="left">FALSE:10868</td>
+<td align="left">FALSE:10868</td>
+<td align="left">FALSE:10868</td>
+<td align="left">FALSE:10659</td>
+<td align="left">FALSE:10659</td>
+<td align="left">FALSE:10659</td>
+<td align="left">FALSE:10659</td>
+<td align="left">FALSE:10659</td>
+<td align="left">FALSE:10659</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">TRUE :209</td>
+<td align="left">TRUE :209</td>
+<td align="left">TRUE :209</td>
+<td align="left">TRUE :209</td>
+<td align="left">TRUE :209</td>
+<td align="left">TRUE :209</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
+</div>
+</div>
+<div id="data-exploration-and-preliminary-results" class="section level1">
+<h1>Data exploration and Preliminary Results</h1>
+<p><br></p>
+<div id="line-chart---death-rate-change-pattern" class="section level2">
+<h2>Line chart - Death rate change pattern</h2>
+<p>Figure out “what’s the death rate change pattern in the whole US” from time duration, region and causes three aspects</p>
+<p>Let’s go time duration first, illustrate the all-causes death rate change pattern in the US.</p>
+<p>First extra all causes data and create a new dataset</p>
+<pre class="r"><code>allcause&lt;- alldata %&gt;%
+  filter(alldata$`Cause Name` == &quot;All causes&quot;)</code></pre>
+<p>Then use ggplot to draw line chart (year vs death rate) and grouped by states, should have 52 lines in total</p>
+<pre class="r"><code>ggplot(allcause,mapping = aes(x=allcause$`Year`, y = allcause$`Age-adjusted Death`)) +
+  geom_point(color = &quot;Orange&quot;)+
+  geom_smooth(method=&quot;lm&quot;, color = &quot;Black&quot;)+
+  facet_wrap(~State)+
+  labs(title = &quot;Death rate change in each state and the whole US from 1999 to 2017&quot;,x=&quot;year&quot;, y =&quot;death rate&quot;, size = 8)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="Midterm_files/figure-html/line%20chart-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>This graph indicates all 51 states and the whole United states death rate change during 18 years. According to this graph, all 51 states follow a downward trend which meet our hypothesis.</p>
+<p><br></p>
+</div>
+<div id="leaflet---leading-cause-of-death-in-each-state-in-1999-and-2017" class="section level2">
+<h2>Leaflet - Leading cause of death in each state in 1999 and 2017</h2>
+<p>Next from the region prospective, use the location information to make a leaflet that indicates the leading cause of death with highest death number in 2017 and 1999 respectively</p>
+<p><br></p>
+<div id="section" class="section level3">
+<h3>1999</h3>
+<pre class="r"><code>data1999&lt;- alldata %&gt;%
+  group_by(State) %&gt;%
+  filter(Year ==1999, `Cause Name` != &quot;All causes&quot;) %&gt;%
+  filter(Deaths == max(Deaths))</code></pre>
+<pre class="r"><code>pal &lt;- colorFactor(palette = &quot;RdYlBu&quot;,domain=data1999$Deaths)
+
+leaflet(data1999) %&gt;% 
+  addProviderTiles(&#39;CartoDB.Positron&#39;) %&gt;%
+  addCircles(
+    lat = ~Latitude, lng=~Longitude,
+    color = ~ pal(data1999$Deaths),
+    label = ~paste0(Deaths, &#39; Leading cause: &#39;, `Cause Name` ),
+    opacity =1, fillOpacity=1, radius=600
+  ) </code></pre>
+<div id="htmlwidget-e2514489241a5425417d" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e2514489241a5425417d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircles","args":[[32.6010112,61.3025006,34.1682185,34.7519275,37.2718745,38.9979339,41.5187835,39.145251,38.8993487,27.9757279,32.6781248,20.46,45.4945756,39.739318,39.7662195,41.9383166,38.4987789,37.8222935,30.9733766,45.2185133,38.8063524,42.0629398,44.9435598,46.4418595,32.5851062,38.3046615,46.6797995,41.5008195,38.502032,44.0012306,40.1430058,34.1662325,40.7056258,35.2145629,47.4678819,40.1903624,35.3097654,44.1419049,40.9945928,41.5827282,33.62505,44.2126995,35.830521,31.1693363,null,39.4997605,43.8717545,38.0033855,38.8993487,38.9201705,44.7862968,43.000325],[-86.6807365,-158.7750198,-111.930907,-92.1313784,-119.2704153,-105.550567,-72.757507,-75.4189206,-77.0145666,-83.8330166,-83.2229757,-157.505,-114.1424303,-89.504139,-86.441277,-93.389798,-98.3200779,-85.7682399,-91.4299097,-69.0148656,-77.2684162,-71.718067,-86.4158049,-93.3655146,-89.8772196,-92.437099,-110.044783,-99.680902,-117.0230604,-71.5799231,-74.7311156,-106.0260685,-73.97968,-79.8912675,-100.3022655,-82.6692525,-98.7165585,-120.5380993,-77.6046984,-71.5064508,-80.9470381,-100.2471641,-85.9785989,-100.0768425,null,-111.547028,-72.4477828,-79.4587861,-77.0145665,-80.1816905,-89.8267049,-107.5545669],600,null,null,{"interactive":true,"className":"","stroke":true,"color":["#C7E7F1","#A50026","#F7FBD0","#FEE495","#36429B","#FEBF70","#FFF0A8","#D62F27","#C22027","#3F5BA7","#88BCD9","#E85537","#ED603C","#4E7FB9","#93C5DE","#FFEA9F","#FFD283","#D2ECF4","#E4F4F1","#FA9253","#DCF1F7","#A8D6E8","#6194C5","#FFFCBA","#FFF6B1","#7DB4D5","#E24A31","#FEB567","#FDAA5F","#F36B42","#6A9FCA","#FB9E59","#3B4FA1","#72ABD0","#CC2827","#5889BF","#F1F9DB","#FEDC8C","#4574B3","#F8854D","#FCFEC5","#DC3D2C","#9DCEE3","#4267AD","#313695","#F67848","#B81827","#B2DDEB","#EBF7E6","#FEC97A","#BDE2EE","#AF0D26"],"weight":5,"opacity":1,"fill":true,"fillColor":["#C7E7F1","#A50026","#F7FBD0","#FEE495","#36429B","#FEBF70","#FFF0A8","#D62F27","#C22027","#3F5BA7","#88BCD9","#E85537","#ED603C","#4E7FB9","#93C5DE","#FFEA9F","#FFD283","#D2ECF4","#E4F4F1","#FA9253","#DCF1F7","#A8D6E8","#6194C5","#FFFCBA","#FFF6B1","#7DB4D5","#E24A31","#FEB567","#FDAA5F","#F36B42","#6A9FCA","#FB9E59","#3B4FA1","#72ABD0","#CC2827","#5889BF","#F1F9DB","#FEDC8C","#4574B3","#F8854D","#FCFEC5","#DC3D2C","#9DCEE3","#4267AD","#313695","#F67848","#B81827","#B2DDEB","#EBF7E6","#FEC97A","#BDE2EE","#AF0D26"],"fillOpacity":1},null,null,["13419 Leading cause: Heart disease","633 Leading cause: Cancer","10800 Leading cause: Heart disease","8315 Leading cause: Heart disease","71930 Leading cause: Heart disease","6420 Leading cause: Heart disease","9127 Leading cause: Heart disease","2011 Leading cause: Heart disease","1652 Leading cause: Heart disease","51434 Leading cause: Heart disease","17597 Leading cause: Heart disease","2410 Leading cause: Heart disease","2532 Leading cause: Heart disease","33387 Leading cause: Heart disease","16661 Leading cause: Heart disease","8699 Leading cause: Heart disease","6975 Leading cause: Heart disease","12098 Leading cause: Heart disease","12007 Leading cause: Heart disease","3418 Leading cause: Heart disease","12080 Leading cause: Heart disease","15871 Leading cause: Heart disease","27693 Leading cause: Heart disease","9533 Leading cause: Heart disease","9336 Leading cause: Heart disease","17974 Leading cause: Heart disease","2049 Leading cause: Heart disease","4497 Leading cause: Heart disease","4231 Leading cause: Heart disease","2751 Leading cause: Heart disease","23493 Leading cause: Heart disease","3452 Leading cause: Heart disease","58987 Leading cause: Heart disease","19191 Leading cause: Heart disease","1833 Leading cause: Heart disease","33192 Leading cause: Heart disease","11263 Leading cause: Heart disease","7263 Leading cause: Heart disease","41707 Leading cause: Heart disease","3008 Leading cause: Heart disease","9981 Leading cause: Heart disease","2024 Leading cause: Heart disease","16280 Leading cause: Heart disease","43418 Leading cause: Heart disease","725192 Leading cause: Heart disease","2786 Leading cause: Heart disease","1342 Leading cause: Heart disease","15329 Leading cause: Heart disease","11515 Leading cause: Heart disease","6822 Leading cause: Heart disease","13827 Leading cause: Heart disease","1009 Leading cause: Heart disease"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]}],"limits":{"lat":[20.46,61.3025006],"lng":[-158.7750198,-69.0148656]}},"evals":[],"jsHooks":[]}</script>
+<p>Take more closer look at 1999 year data</p>
+<pre class="r"><code>knitr::kable(table(data1999$`Cause Name`))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Cancer</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Heart disease</td>
+<td align="right">51</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>region1999&lt;- data1999 %&gt;%
+  group_by(Region) %&gt;%
+  summarise(sum(Deaths))%&gt;%
+  replace_na(list(Region = &quot;US total&quot;))
+knitr::kable(region1999)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Region</th>
+<th align="right">sum(Deaths)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Midwest</td>
+<td align="right">176295</td>
+</tr>
+<tr class="even">
+<td align="left">Northeast</td>
+<td align="right">171784</td>
+</tr>
+<tr class="odd">
+<td align="left">Southeast</td>
+<td align="right">195472</td>
+</tr>
+<tr class="even">
+<td align="left">Southwest</td>
+<td align="right">68933</td>
+</tr>
+<tr class="odd">
+<td align="left">West</td>
+<td align="right">112778</td>
+</tr>
+<tr class="even">
+<td align="left">US total</td>
+<td align="right">725192</td>
+</tr>
+</tbody>
+</table>
+<p>Now we know that in 1999, the most risk death cause is <strong>heart disease</strong> with 50 states had this leading cause. And the region with highest death number is <strong>Southeast</strong>, which include Alabama, Arkansas, District of Columbia, Delaware, Florida, Georgia, Kentucky, Louisiana, Mississippi, North Carolina, South Carolina, Tennessee, Virginia West Virginia</p>
+<p><br></p>
+</div>
+<div id="section-1" class="section level3">
+<h3>2017</h3>
+<pre class="r"><code>data2017&lt;- alldata %&gt;%
+  group_by(State) %&gt;%
+  filter(Year ==2017, `Cause Name` != &quot;All causes&quot;) %&gt;%
+  filter(Deaths == max(Deaths))</code></pre>
+<pre class="r"><code>pal2 &lt;- colorFactor(c(&#39;cyan3&#39;,&#39;goldenrod2&#39;),domain=data2017$Deaths)
+
+leaflet(data2017) %&gt;% 
+  addProviderTiles(&#39;CartoDB.Positron&#39;) %&gt;%
+  addCircles(
+    lat = ~Latitude, lng=~Longitude,
+    color = ~ pal2(data2017$Deaths),
+    label = ~paste0(Deaths, &#39; Leading cause: &#39;, `Cause Name` ),
+    opacity =1, fillOpacity=1, radius=600
+  ) </code></pre>
+<div id="htmlwidget-da0be5f0ffb802cc7cd9" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-da0be5f0ffb802cc7cd9">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircles","args":[[32.6010112,61.3025006,34.1682185,34.7519275,37.2718745,38.9979339,41.5187835,39.145251,38.8993487,27.9757279,32.6781248,20.46,45.4945756,39.739318,39.7662195,41.9383166,38.4987789,37.8222935,30.9733766,45.2185133,38.8063524,42.0629398,44.9435598,46.4418595,32.5851062,38.3046615,46.6797995,41.5008195,38.502032,44.0012306,40.1430058,34.1662325,40.7056258,35.2145629,47.4678819,40.1903624,35.3097654,44.1419049,40.9945928,41.5827282,33.62505,44.2126995,35.830521,31.1693363,null,39.4997605,43.8717545,38.0033855,38.8993487,38.9201705,44.7862968,43.000325],[-86.6807365,-158.7750198,-111.930907,-92.1313784,-119.2704153,-105.550567,-72.757507,-75.4189206,-77.0145666,-83.8330166,-83.2229757,-157.505,-114.1424303,-89.504139,-86.441277,-93.389798,-98.3200779,-85.7682399,-91.4299097,-69.0148656,-77.2684162,-71.718067,-86.4158049,-93.3655146,-89.8772196,-92.437099,-110.044783,-99.680902,-117.0230604,-71.5799231,-74.7311156,-106.0260685,-73.97968,-79.8912675,-100.3022655,-82.6692525,-98.7165585,-120.5380993,-77.6046984,-71.5064508,-80.9470381,-100.2471641,-85.9785989,-100.0768425,null,-111.547028,-72.4477828,-79.4587861,-77.0145665,-80.1816905,-89.8267049,-107.5545669],600,null,null,{"interactive":true,"className":"","stroke":true,"color":["#CCBD63","#00CDCD","#C4BE6D","#AEC285","#ECB528","#A4C48E","#9EC594","#5ECABB","#36CCC7","#EAB52D","#D7BA52","#71C9B2","#7CC8AC","#E0B843","#CEBC60","#A1C491","#96C69A","#B4C17F","#BDC076","#81C8A9","#BFBF73","#C9BD66","#DEB947","#B1C282","#A8C38B","#D1BC5C","#65CAB8","#85C7A6","#9AC597","#77C9AF","#DABA4E","#8EC6A0","#E6B637","#DCB94B","#43CCC4","#E2B73F","#BAC079","#ABC388","#E4B73B","#6BCAB5","#B7C17C","#56CBBE","#D5BB55","#E8B632","#EEB422","#8AC7A3","#4DCBC1","#D3BB59","#C7BE69","#92C69D","#C2BF70","#25CDCA"],"weight":5,"opacity":1,"fill":true,"fillColor":["#CCBD63","#00CDCD","#C4BE6D","#AEC285","#ECB528","#A4C48E","#9EC594","#5ECABB","#36CCC7","#EAB52D","#D7BA52","#71C9B2","#7CC8AC","#E0B843","#CEBC60","#A1C491","#96C69A","#B4C17F","#BDC076","#81C8A9","#BFBF73","#C9BD66","#DEB947","#B1C282","#A8C38B","#D1BC5C","#65CAB8","#85C7A6","#9AC597","#77C9AF","#DABA4E","#8EC6A0","#E6B637","#DCB94B","#43CCC4","#E2B73F","#BAC079","#ABC388","#E4B73B","#6BCAB5","#B7C17C","#56CBBE","#D5BB55","#E8B632","#EEB422","#8AC7A3","#4DCBC1","#D3BB59","#C7BE69","#92C69D","#C2BF70","#25CDCA"],"fillOpacity":1},null,null,["13110 Leading cause: Heart disease","926 Leading cause: Cancer","12398 Leading cause: Heart disease","8270 Leading cause: Heart disease","62797 Leading cause: Heart disease","7829 Leading cause: Cancer","7138 Leading cause: Heart disease","2085 Leading cause: Cancer","1284 Leading cause: Heart disease","46440 Leading cause: Heart disease","18389 Leading cause: Heart disease","2575 Leading cause: Heart disease","3084 Leading cause: Heart disease","25394 Leading cause: Heart disease","14445 Leading cause: Heart disease","7180 Leading cause: Heart disease","5723 Leading cause: Heart disease","10343 Leading cause: Heart disease","11260 Leading cause: Heart disease","3391 Leading cause: Cancer","11653 Leading cause: Heart disease","12934 Leading cause: Cancer","25187 Leading cause: Heart disease","9896 Leading cause: Cancer","7944 Leading cause: Heart disease","14820 Leading cause: Heart disease","2164 Leading cause: Heart disease","3581 Leading cause: Heart disease","6417 Leading cause: Heart disease","2760 Leading cause: Cancer","18840 Leading cause: Heart disease","3896 Leading cause: Heart disease","44092 Leading cause: Heart disease","19474 Leading cause: Cancer","1326 Leading cause: Heart disease","28008 Leading cause: Heart disease","10772 Leading cause: Heart disease","8083 Leading cause: Cancer","32312 Leading cause: Heart disease","2339 Leading cause: Heart disease","10418 Leading cause: Heart disease","1715 Leading cause: Cancer","16019 Leading cause: Heart disease","45346 Leading cause: Heart disease","647457 Leading cause: Heart disease","3749 Leading cause: Heart disease","1434 Leading cause: Cancer","15064 Leading cause: Cancer","12664 Leading cause: Cancer","4849 Leading cause: Heart disease","11860 Leading cause: Heart disease","1001 Leading cause: Heart disease"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]}],"limits":{"lat":[20.46,61.3025006],"lng":[-158.7750198,-69.0148656]}},"evals":[],"jsHooks":[]}</script>
+<p>Take closer look at 2017 data</p>
+<pre class="r"><code>knitr::kable(table(data2017$`Cause Name`))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Cancer</td>
+<td align="right">13</td>
+</tr>
+<tr class="even">
+<td align="left">Heart disease</td>
+<td align="right">39</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>region2017&lt;- data2017 %&gt;%
+  group_by(Region) %&gt;%
+  summarise(sum(Deaths))%&gt;%
+  replace_na(list(Region = &quot;US total&quot;))
+knitr::kable(region2017)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Region</th>
+<th align="right">sum(Deaths)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Midwest</td>
+<td align="right">149135</td>
+</tr>
+<tr class="even">
+<td align="left">Northeast</td>
+<td align="right">136893</td>
+</tr>
+<tr class="odd">
+<td align="left">Southeast</td>
+<td align="right">184949</td>
+</tr>
+<tr class="even">
+<td align="left">Southwest</td>
+<td align="right">72412</td>
+</tr>
+<tr class="odd">
+<td align="left">West</td>
+<td align="right">111289</td>
+</tr>
+<tr class="even">
+<td align="left">US total</td>
+<td align="right">647457</td>
+</tr>
+</tbody>
+</table>
+<p>Now we know that in 2017, the most risk death cause is still <strong>heart disease</strong>. And the region with highest death number is still <strong>Southeast</strong>, which include Alabama,</p>
+<p><br></p>
+<hr />
+</div>
+</div>
+</div>
+<div id="brief-conclusion" class="section level1">
+<h1>Brief Conclusion</h1>
+<p>Now we could draw a preliminary conclusion to our question:</p>
+<ul>
+<li><p>It’s apparently that all death rate went down in the past 18 years in all 51 states</p></li>
+<li><p>Compared to 1999, the death number decrease in 2017. However, there is an exception that the death number in region <strong>southwest</strong> increase from 68933 to 72412. Possible reason might be the increase population in this region. Could take closer look combined with some external information next step.</p></li>
+<li><p>From the geographic aspect, the pattern did not change. The order of death number in these five region is still <strong>Southeast &gt; Midwest &gt; Northwest &gt; West &gt; Southwest</strong> It’s worth noting that, southwest has significant low number compared to other 4. Could combined with population data and state death rate data to check whether the low number comes from low population or low disease incidence. (we don’t know the region population, so could not sum all death rate up for now)</p></li>
+<li><p>From the disease cause aspect, in 1999, the most fatal death cause is heart disease which becoming leading cause in 50 states. In 2017, Cancer catchs up a little. This might indicate that nowadays cancer should pay more attention to.</p></li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
