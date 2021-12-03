@@ -265,7 +265,9 @@ fig_2017
 
 ## {-}
 
+We can see from these two graphs that compared with 1999, the death rate in 2017 has dropped significantly in every state. We can see from the map that the entire southeast region, including Missouri, Louisiana, Oklahoma, Mississippi, Kentucky, West Virginia, Tennessee, etc., has the highest mortality rate.
 
+<br>
 
 ## Scatter plot - Death Rate chaning pattern in resepect of causes
 
