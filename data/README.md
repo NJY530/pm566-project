@@ -1,11 +1,11 @@
 Project - Leading Causes of Death: United States
+====
 
 Jiayi Nie
 
-----
 
 This is the folder for all data used in Project: Leading cause of death in United States.
-----
+
 
 * Ten Leading cause of death in United States "bi63-dtpu.csv" Accessed from [CDC](https://data.cdc.gov/NCHS/NCHS-Leading-Causes-of-Death-United-States/bi63-dtpu)
 
