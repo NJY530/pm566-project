@@ -1,0 +1,52 @@
+State,State Code,Region,Division
+Alaska,AK,West,Pacific
+Alabama,AL,Southeast,East South Central
+Arkansas,AR,Southeast,West South Central
+Arizona,AZ,Southwest,Mountain
+California,CA,West,Pacific
+Colorado,CO,West,Mountain
+Connecticut,CT,Northeast,New England
+District of Columbia,DC,Southeast,South Atlantic
+Delaware,DE,Southeast,South Atlantic
+Florida,FL,Southeast,South Atlantic
+Georgia,GA,Southeast,South Atlantic
+Hawaii,HI,West,Pacific
+Iowa,IA,Midwest,West North Central
+Idaho,ID,West,Mountain
+Illinois,IL,Midwest,East North Central
+Indiana,IN,Midwest,East North Central
+Kansas,KS,Midwest,West North Central
+Kentucky,KY,Southeast,East South Central
+Louisiana,LA,Southeast,West South Central
+Massachusetts,MA,Northeast,New England
+Maryland,MD,Northeast,South Atlantic
+Maine,ME,Northeast,New England
+Michigan,MI,Midwest,East North Central
+Minnesota,MN,Midwest,West North Central
+Missouri,MO,Midwest,West North Central
+Mississippi,MS,Southeast,East South Central
+Montana,MT,West,Mountain
+North Carolina,NC,Southeast,South Atlantic
+North Dakota,ND,Midwest,West North Central
+Nebraska,NE,Midwest,West North Central
+New Hampshire,NH,Northeast,New England
+New Jersey,NJ,Northeast,Middle Atlantic
+New Mexico,NM,Southwest,Mountain
+Nevada,NV,West,Mountain
+New York,NY,Northeast,Middle Atlantic
+Ohio,OH,Midwest,East North Central
+Oklahoma,OK,Southwest,West South Central
+Oregon,OR,West,Pacific
+Pennsylvania,PA,Northeast,Middle Atlantic
+Rhode Island,RI,Northeast,New England
+South Carolina,SC,Southeast,South Atlantic
+South Dakota,SD,Midwest,West North Central
+Tennessee,TN,Southeast,East South Central
+Texas,TX,Southwest,West South Central
+Utah,UT,West,Mountain
+Virginia,VA,Southeast,South Atlantic
+Vermont,VT,Northeast,New England
+Washington,WA,West,Pacific
+Wisconsin,WI,Midwest,East North Central
+West Virginia,WV,Southeast,South Atlantic
+Wyoming,WY,West,Mountain
