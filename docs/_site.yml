@@ -1,5 +1,6 @@
 name: "my-website"
 output_dir: "."
+exclude: ["Report.Rmd"]
 navbar:
   title: "Leading Cause of Death Analysis in United States"
   left:
@@ -7,6 +8,7 @@ navbar:
       icon: fa-home
       href: index.html
     - text: "Supplyment material"
+      href: supplement.html
       
   right:
     - icon: fa-github fa-lg

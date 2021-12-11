@@ -1,11 +1,13 @@
 ---
-title: "PM566 Final Project - Leading Causes of Death: United States"
+title: 'PM566 Final Project - Leading Causes of Death: United States'
 author: "Jiayi Nie"
-date: 12/03/2021
-output: 
-    html_document:
-        toc: TRUE
-        toc_float: TRUE
+date: "12/03/2021"
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    toc: yes
+    toc_float: yes
 ---
 
 Last updated: `r format(Sys.time(), '%d %B, %Y')`
@@ -54,11 +56,11 @@ opts_chunk$set(
 
 # Intro
   
-  This project analyzed the leading cause of death in United States changing pattern regarding time, region and cause from 1999 to 2017. The purpose of this study is to assess what cause of death we should pay more attention to and generate possible hypotheses/explanation for furthur analysis.
+  This project analyzed the leading cause of death in United States changing pattern regarding time, region and cause from 1999 to 2017. The purpose of this study is to assess what cause of death we should pay more attention to and generate possible hypotheses/explanation for further analysis.
   The research questions and hypothesis for this project to examine and analyze are:
   
-  * [*Hypothesis*] The death rate of all-cause death rate follows a decreasing trend in the whole United States and each state due to improved medical car.
-  * [*Questions*] What are the death rate changing patterns regarding time, region, and causes? What should we learn from these patterns?
+  * [**Hypothesis**] The death rate of all-cause death rate follows a decreasing trend in the whole United States and each state due to improved medical car.
+  * [**Questions**] What are the death rate changing patterns regarding time, region, and causes? What should we learn from these patterns?
 
 <br>
 
@@ -86,18 +88,18 @@ N=10868 overservation in total. 6 variables included:
 6) Age-adjusted Death Rate(AADR): Age-adjusted death rates (per 100,000 population) Adjusted based on the 2000 U.S. standard population. Populations used for computing death rates after 2010 are postcensal estimates based on the 2010 census, estimated as of July 1, 2010.
 
 ```{r data loading, cache=TRUE}
-if (!file.exists("bi63-dtpu.csv"))
+if (!file.exists("../data/bi63-dtpu.csv"))
   download.file(
     url = "https://data.cdc.gov/api/views/bi63-dtpu/rows.csv",
-    destfile = "bi63-dtpu.csv",
+    destfile = "../data/bi63-dtpu.csv",
     method   = "libcurl",
     timeout  = 60
     )
-data <- data.table::fread("bi63-dtpu.csv")
+data <- data.table::fread("../data/bi63-dtpu.csv")
 
-region <- data.table::fread("https://raw.githubusercontent.com/NJY530/pm566-project/main/Midterm/USAregion2.csv")
+region <- data.table::fread("https://raw.githubusercontent.com/NJY530/pm566-project/main/data/USAregion2.csv")
 
-location <- data.table::fread("https://raw.githubusercontent.com/NJY530/pm566-project/main/Midterm/USAlocation.csv")
+location <- data.table::fread("https://raw.githubusercontent.com/NJY530/pm566-project/main/data/USAlocation.csv")
 ```
 
 
@@ -157,7 +159,7 @@ linechart <- ggplot(allcause) +
 ggplotly(linechart)
 ```
 
-This graph indicates all 51 states and the whole United states' *age-adjusted death rate* change during 18 years. Hover indicates specific death rate data and state information. According to this graph, all 51 states follow a general downward trend which meets our hypothesis that as time changes, the level of medical care has improved, and the mortality rate has shown a downward trend.
+This graph indicates all 51 states and the whole United states' **age-adjusted death rate** change during **18 years**. Hover indicates specific death rate data and state information. According to this graph, all 51 states follow a general downward trend which meets our hypothesis that as time changes, the level of medical care has improved, and the mortality rate has shown a downward trend.
 
 <br>
 
@@ -247,9 +249,9 @@ fig_2017
 
 ## {-}
 
-These two maps illustrate the *Age-adjusted Death Rate* distribution in 1999 and 2017 across the US. Color represents the death rate. The higher the death rate, the darker the red is. Hover includes AADR and death number.
+These two maps illustrate the **Age-adjusted Death Rate distribution** in 1999 and 2017 **across the US**. Color represents the death rate. The higher the death rate, the darker the red is. Hover includes AADR and death number.
 
-We can see from these two graphs that compared with 1999, the death rate in 2017 has dropped significantly in every state. It's worth noticing that the entire southeast region, including Missouri, Louisiana, Oklahoma, Mississippi, Kentucky, West Virginia, Tennessee, etc., has the highest mortality rate in both 1999 and 2017. Possible explanation analysis see the [supplement section]().
+We can see from these two graphs that compared with 1999, the death rate in 2017 has dropped significantly in every state. It's worth noticing that the entire southeast region, including Missouri, Louisiana, Oklahoma, Mississippi, Kentucky, West Virginia, Tennessee, etc., has the highest mortality rate in both 1999 and 2017. Possible explanation analysis see the [supplement section](supplement.html).
 
 <br>
 
@@ -266,18 +268,17 @@ US_cause <- data %>%
 
 US_cause %>% 
   plot_ly(x = ~Year, y = ~`Age-adjusted Death Rate`, 
-          type = 'scatter', mode = 'markers', color = ~`Cause Name`,
+          type = 'scatter', mode = 'lines+markers', color = ~`Cause Name`,
           size = ~`Deaths`, sizes = c(5, 30), marker = list(sizemode='diameter', opacity=0.5),
           hoverinfo = 'text',
           text = ~paste( paste(`Cause Name`, ":", sep=""), paste(" Death Number ", Deaths, sep="") , paste(" Age-adjusted Death Rate: ", `Age-adjusted Death Rate`, sep=""), sep = "<br>")) %>%
-  add_lines(y=~`Age-adjusted Death Rate`)%>%
   layout(title = "Yeas vs. Age-adjusted Death rate in respct of leading cause ",
                   yaxis = list(title = "Age-adjusted Death Rate"), xaxis = list(title = "Year"),
          hovermode = "compare")
 
 ```
 
-This scttor plot indicates *age-adjusted death rate* changes by *year*. Bubble size is based on *death number*. Each different cause of death presented as different color. Hover includes the disease that causes death, death rate, and death number.
+This scttor plot indicates **each cause age-adjusted death rate** changes by **year**. Bubble size is based on **death number**. Each different cause of death presented as different color. Hover includes the disease that causes death, death rate, and death number.
 
 We can see that in this graph, except for heart disease and cancer, the death rates of the other eight causes of death in 18 years are all lower than 60, fluctuating within a specific range. Although they have been declining, the death rates from cancer and heart disease are still three to four times that of other causes of death. This means that heart disease and cancer are still the predominant leading causes of death in the United States.
 
@@ -301,7 +302,7 @@ From the disease cause aspect, in 1999, the fatal death cause was heart disease,
 
 # Download the report
 
-The PDF version could be downloaded [here]()
+The PDF version could be downloaded [here](Report.pdf)
 
 <br>
 
@@ -309,5 +310,8 @@ The PDF version could be downloaded [here]()
 
 # Reference
 
+[1] NCHS - Leading Causes of Death: United States | Data | Centers for Disease Control and Prevention. (n.d.). Retrieved December 9, 2021, from https://data.cdc.gov/NCHS/NCHS-Leading-Causes-of-Death-United-States/bi63-dtpu
 
-<br>
+[2] NJSHAD - NCHS 113 Selected Causes of Death. (n.d.). Retrieved December 9, 2021, from https://www-doh.state.nj.us/doh-shad/query/NCHS113.htm
+
+[3] United States Regions | National Geographic Society. (n.d.). Retrieved December 9, 2021, from https://www.nationalgeographic.org/maps/united-states-regions/

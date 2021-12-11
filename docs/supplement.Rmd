@@ -1,0 +1,159 @@
+---
+title: "Supplement"
+author: "Jiayi Nie"
+date: 12/08/2021
+output: 
+    html_document:
+        toc: TRUE
+        toc_float: TRUE
+---
+
+Last updated: `r format(Sys.time(), '%d %B, %Y')`
+
+<br>
+```{r setup, include=FALSE, message=FALSE, echo=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+library(tidyverse)
+library(tidytext)
+library(data.table)
+library(httr)
+library(leaflet)
+library(dplyr)
+library(plotly)
+library(DT)
+library(knitr)
+library(htmlTable)
+
+
+# INITALIZE CODE CHUNK OPTIONS
+opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  eval=TRUE,
+  echo = FALSE,
+  cache = FALSE,
+  tidy = TRUE,
+  fig.width = 7, 
+  fig.align = 'center',
+  fig.asp = 0.618,
+  out.width = "700px",
+  class.source = "code-r")
+```
+
+
+```{css, echo = FALSE}
+.code-r { /* Code block */
+  font-size: 15px;
+}
+
+.code-r-small { /* Code block */
+  font-size: 10px;
+}
+```
+
+<br>
+
+# Intro
+  
+  In this section we will further discuss the possible explanation for abnormal high death rate in Southeast area, to be more specific, 14 states included: Alabama, Arkansas, District of Columbia, Delaware, Florida, Georgia, Kentucky, Louisiana, Mississippi, North Carolina, South Carolina, Tennessee, Virginia, West Virginia. This section we hypothesis that the abnormal high death rate in southeast area is attributed to high tobacco use prevalence, which could induce heart disease, cancer and other high-risk disease. 
+
+<br>
+
+----
+
+# Data
+
+  The dataset used for this supplement presents tobacco use prevalence by demographics, cigarette and e-cigarette use frequency, and quit attempts from 2011 to 2019. Dateset is accessed from CDC (https://chronicdata.cdc.gov/Survey-Data/Behavioral-Risk-Factor-Data-Tobacco-Use-2011-to-pr/wsas-xwh5)
+  
+  Other dataset included in this analysis:
+  
+  * The United States regions dataset. It contains all 51 states, and groups them into 5 regions according to their geographic position on the continent: the Northeast, Southwest, West, Southeast, and Midwest. ([ref](https://www.nationalgeographic.org/maps/united-states-regions/) 
+[data source](https://www.kaggle.com/omer2040/usa-states-to-region))
+
+  EDA checklist was applied to clean and wrangle our data. Here is some basic information about this dataset. Only extract `Year`, `LocationAbbr`, `LocationDesc`, `MeasureDesc`, `Data_Value` column from original dataset.
+
+```{r data loading, cache=TRUE}
+if (!file.exists("../data/wsas-xwh5.csv"))
+  download.file(
+    url = "https://chronicdata.cdc.gov/api/views/wsas-xwh5/rows.csv",
+    destfile = "../data/wsas-xwh5.csv",
+    method   = "libcurl",
+    timeout  = 60
+    )
+rawsmoke <- data.table::fread("../data/wsas-xwh5.csv")
+
+region <- data.table::fread("https://raw.githubusercontent.com/NJY530/pm566-project/main/data/USAregion2.csv")
+
+```
+
+```{r merge with region}
+
+smoke_region<-merge(
+  x=rawsmoke,
+  y=region,
+  by.x= "LocationDesc",
+  by.y = "State",
+  all.x = TRUE,
+  all.y = FALSE
+)
+
+```
+
+
+```{r extract data}
+smoke <- smoke_region %>% 
+  filter(Gender == "Overall", Race == "All Races", Age == "All Ages", MeasureDesc == "Current Use") %>%
+  select(YEAR, LocationAbbr, LocationDesc, MeasureDesc, Data_Value, Region)
+
+smoke<- as.data.table(smoke)[, sum(Data_Value, na.rm = TRUE), by = .(YEAR,MeasureDesc,Region)]
+smoke <- na.omit(smoke)
+
+```
+
+
+After data extraction, current dataset information is listed below:
+
+N=45 observation in total. 4 variables included:
+
+1) Year: From 2011 to 2019
+2) MeasureDesc: The measurement description, filter `Current Use` for this dataset. Which represent all 
+3) Region: Region classification intro above, include 5 classifiactions
+4) Data_Value: unit-percentage, represents tobacco use percentage in this dataset
+
+
+<br>
+
+----
+
+
+# Data exploration and Preliminary Results
+
+
+Use `Plotly` to draw line chart (year vs smoke percentage) and grouped by states.
+
+```{r line chart}
+smoke$YEAR <- as.integer(smoke$YEAR)
+line<-ggplot(smoke) +
+  geom_line(mapping = aes(x=smoke$YEAR, y = smoke$V1, color= smoke$Region))+
+  scale_x_continuous("Year", labels = as.character(smoke$YEAR), breaks = smoke$YEAR)+
+  labs(title = "Tobacco use percentage in five regions from 2011 to 2019", y ="tobacco use percentage %", size = 10)
+ggplotly(line)
+
+```
+
+This graph indicates 5 regions tobacco use percentages from 2011 to 2019. The southeast region keeps the highest tobacco use percentage among these 5 regions, which meets our hypothesis that the abnormally high death rate is related to increased tobacco use percentage.
+
+<br>
+
+
+
+----
+
+# Conclusion
+
+According to our previous analysis, there is an unusually high death rate in the southeast area. After introducing tobacco use data, we could see that the prevalence of tobacco use in the southeast area remains the most elevated. It's widely acknowledged that tobacco usage may induce various fatal diseases. So the high tobacco use prevalence could be a possible explanation for this symptom. 
+
+
+# Reference
+
+Behavioral Risk Factor Data: Tobacco Use (2011 to present) | Chronic Disease and Health Promotion Data & Indicators. (n.d.). Retrieved December 9, 2021, from https://chronicdata.cdc.gov/Survey-Data/Behavioral-Risk-Factor-Data-Tobacco-Use-2011-to-pr/wsas-xwh5
