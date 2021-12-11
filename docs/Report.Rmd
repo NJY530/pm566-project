@@ -145,7 +145,7 @@ Figure 1: Line chart for age-adjusted death rate changing pattern regarding time
 
 <br>
 
-This line chart (Figure.1) presents 51 states and the United States death rate changing pattern during 18 years. 52 lines in total are included. According to this graph, the overall mortality rate in the United States is on a downward trend. Some states fluctuated in 2005 and 2008, but compared with 1999, the death rate of the entire United States in 2017 was significantly lower. The interactive version with detailed on hover is available on [website](https://njy530.github.io/pm566-project/#Time). 
+This line chart (Figure.1) presents 51 states and the United States death rate changing pattern during 18 years. Fifty-two lines in total are included. According to this graph, the overall mortality rate in the United States is downward. Some states fluctuated in 2005 and 2008, but compared with 1999, the death rate of the entire United States in 2017 was significantly lower. The interactive version with details on hover is available on [website](https://njy530.github.io/pm566-project/#Time). 
 
 <br>
 
@@ -242,8 +242,7 @@ Figure 3: Age-adjusted death rate distribution in 2017
 <br>
 \newpage
 
-These two maps (Figure.2 & Figure.3) show the distribution of death rates in each state in the United States in 1999 and 2017 respectively. Mortality is represented by the shade of color. The higher the mortality rate, the darker the color. It is obvious that the death rate in each state in 2017 has decreased compared to 1999, which is consistent with the results we have observed before. In terms of regional distribution, it is worth noting that the Southeast region had significantly higher mortality rates in both 1999 and 2017 compared with other regions. Hawaii's death rate has always been the lowest in the country, which can also be observed from the previous line chart (Figure.1). Hawaii's death rate has always been the lowest in the country while Mississippi keeps as the highest , which can also be observed from the previous line chart. Compared to 1999, the death rate in New York State, California and Minnesota in 2017 decreased significantly. Interactive figure with detailed value in hover is available on [website](https://njy530.github.io/pm566-project/#Region).
-
+These two maps (Figure.2 & 3) show the distribution of death rates in each state in the United States in 1999 and 2017, respectively. The shade of color represents mortality. The death rate in each state in 2017 has decreased compared to 1999, which is consistent with the results we have observed before. In terms of regional distribution, it is worth noting that the Southeast region had significantly higher mortality rates in both 1999 and 2017 compared with other regions. Hawaii's death rate has always been the lowest in the country, which can be observed from the previous line chart (Figure.1). Hawaii's death rate has always been the lowest in the country, while Mississippi keeps as the highest, which can also be observed from the previous line chart. Compared to 1999, the death rate in New York State, California and Minnesota in 2017 decreased significantly. Interactive figure with detailed value in hover is available on [website](https://njy530.github.io/pm566-project/#Region).
 
 ## 3.3 Changing pattern regarding causes
 
@@ -273,17 +272,17 @@ Figure 4: Scatter plot for 10 causes' age-adjusted death rate changing pattern f
 \end{footnotesize}
 
 
-This scatter plot (Figure.4) indicates 10 causes' age-adjusted death rate changing patter from 1999 to 2017. Bubble size is based on death number. This graph shows that except for heart disease and cancer, the death rates of the other eight causes of death in 18 years are all lower than 60, fluctuating within a specific range. Although they have been declining, the death rates from cancer and heart disease are still three to four times that of other causes of death. This means that heart disease and cancer are still the predominant leading causes of death in the United States.
+This scatter plot (Figure.4) indicates 10 causes' age-adjusted death rate changing pattern from 1999 to 2017. Bubble size is based on death number. This graph shows that except for heart disease and cancer, the death rates of the other eight causes of death in 18 years are lower than 60, fluctuating within a specific range. Although they have been declining, the death rates from cancer and heart disease are still three to four times that of other causes of death. This means that heart disease and cancer are still the predominant leading causes of death in the United States.
 
 <br>
 
-It is worth noting that when we carefully observe these data. For most causes of death, the number of deaths is monotonously increasing rather than monotonously decreasing, such as cancer, Alzheimer's disease, etc. Interactive figure with detailed message in hover is available on [website](https://njy530.github.io/pm566-project/#Causes)
+It is worth noting that when we carefully observe these data. For most causes of death such as cancer and Alzheimer's disease, the number of deaths is monotonously increasing rather than monotonously decreasing. Interactive figure with detailed message in hover is available on [website](https://njy530.github.io/pm566-project/#Causes)
 
 <br>
 
 # Discussion
 
-We can see from the previous conclusions that in terms of timeline, the death rate in the United States is showing a downward trend, which is associated the background of technological development and the improvement of medical standards. From a regional point of view, there is an abnormally high mortality rate in the Southeast region. Therefore, data on tobacco use was introduced to further explore possible explanations for this phenomenon. According to the regional distribution suggested by National Geographic [3], the entire United States is divided into five regions. Use the data on tobacco use in the United States from 2011 to 2019 [4] to study the prevalence of tobacco use in five regions (Figure.5)
+We can see from the previous conclusions that in terms of timeline, the death rate in the United States is showing a downward trend, which is associated with the background of technological development and the improvement of medical standards. From a regional point of view, there is an abnormally high mortality rate in the Southeast region. Therefore, data on tobacco use was introduced to explore possible explanations for this phenomenon further. According to the regional distribution suggested by National Geographic [3], the entire United States is divided into five regions. Use the data on tobacco use in the United States from 2011 to 2019 [4] to study the prevalence of tobacco use in five regions (Figure.5)
 
 ```{r smoke data loading, cache=TRUE}
 if (!file.exists("../data/wsas-xwh5.csv"))
@@ -342,22 +341,17 @@ orca(fig5,"../data/smoke_region.png", width=1000,height = 550)
 Figure 5: Line chart for tobacco use prevalence among 5 regions from 1999 to 2017
 \end{footnotesize}
 
-
 <br>
 
-<br>
+This graph (Figure.5) indicates five regions' tobacco use percentages from 2011 to 2019. The southeast region keeps the highest tobacco use percentage among these five regions. It is widely acknowledged that tobacco usage may induce various fatal diseases. Thus, the unusually high mortality in the southeast area might be associated with a high tobacco use rate.
 
-This graph (Figure.5) indicates 5 regions tobacco use percentages from 2011 to 2019. The southeast region keeps the highest tobacco use percentage among these 5 regions. It's widely acknowledged that tobacco usage may induce various fatal diseases. Thus, the unusual high mortality in southeast area might associated with high tobacco use rate. 
-
-<br>
-
-As for the phenomenon that the mortality rate of certain diseases such as cancer have decreased and the number of deaths has increased, the possible explanations are the increasing in the population, the aging of the population, and with the development of science and technology and the improvement of medical standards, cancer is more and more easily detected.
+The mortality rate of certain diseases such as cancer has decreased, and deaths have increased. The possible explanations include an increase in population, the ageing of the population, and the early detection of cancer with the development of science and technology and the improvement of medical standards.
 
 <br>
 
 # Conclusion and summary
 
-In this project, we explore the changing pattern of age-adjusted death rate nationwide regarding time, region and causes. Overall, all-causes morality rate decrease significantly during 18 years. Regarding each specific cause of death, the mortality rate of cancer and heart disease is 3 to 4 times higher than that of other causes of death. Although their mortality rate is declining, they are still one of the leading causes of death in the United States. The other eight causes of death, including Alzheimer's disease, flu, stroke, etc., fluctuating at a relatively low level. From a regional perspective, the states of Hawaii, New York, and California had relatively low death rates in 2017, while the southeastern region, including Louisiana, Mississippi, and Georgia, etc., had relatively high death rates. The high rate of tobacco use in this region may be related to the high mortality rate.
+This project explores the changing pattern of age-adjusted death rates nationwide regarding time, region, and causes. Overall, the all-cause mortality rate decreases significantly during 18 years. Regarding each specific cause of death, the mortality rate of cancer and heart disease is 3 to 4 times higher than other causes of death. Although their mortality rate is declining, they are still one of the leading causes of death in the United States. The other eight causes of death, including Alzheimer's disease, flu, stroke, etc., fluctuate at a relatively low level. From a regional perspective, Hawaii, New York, and California had relatively low death rates in 2017, while the southeastern region, including Louisiana, Mississippi, and Georgia, etc., had relatively high death rates. The high rate of tobacco use in this region may be related to the high mortality rate.
 
 
 <br>
